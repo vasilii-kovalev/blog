@@ -1,6 +1,6 @@
 exclude:
   - "*"
 include:
-  - "articles/*"
-  - "assets/*"
-  - "index.html"
+  - articles
+  - assets
+  - index.html
