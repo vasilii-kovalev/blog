@@ -1,0 +1,6 @@
+exclude:
+  - "*"
+include:
+  - "*.html"
+  - "*.css"
+  - "*.js"
