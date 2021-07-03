@@ -6,9 +6,9 @@
   "main": "index.html",
   "keywords": [
     "blog",
-    "javascript",
-    "html",
     "css",
+    "html",
+    "javascript",
     "markdown"
   ],
   "author": "Vasilii Kovalev <vasilii.kovalev95@yandex.ru>",
@@ -22,9 +22,12 @@
     "url": "https://github.com/vasilii-kovalev/blog/issues"
   },
   "scripts": {
-    "start": "yarn serve"
+    "start": "yarn serve",
+    "prettier:check": "prettier --check .",
+    "prettier:fix": "prettier --write ."
   },
   "devDependencies": {
+    "prettier": "^2.3.2",
     "serve": "^11.3.2"
   }
 }

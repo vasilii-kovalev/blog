@@ -1,7 +1,9 @@
 exclude:
   - markdown
   - _config.yml
+  - .editorconfig
   - .gitignore
+  - .prettierrc
   - LICENSE
   - package.json
   - README.md
