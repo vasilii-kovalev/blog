@@ -3,4 +3,5 @@ exclude:
 include:
   - "*/**/*.html"
   - "*.css"
+  - "**/*.css"
   - "*/**/*.js"
