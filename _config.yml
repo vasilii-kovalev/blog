@@ -1,5 +1,5 @@
 site:
-  url: /blog
+  url: https://vasilii-kovalev.github.io/blog/
 exclude:
   - markdown
   - _config.yml
