@@ -1,6 +1,6 @@
 exclude:
   - "*"
 include:
-  - "*.html"
-  - "*.css"
-  - "*.js"
+  - "*/**/*.html"
+  - "*/**/*.css"
+  - "*/**/*.js"
