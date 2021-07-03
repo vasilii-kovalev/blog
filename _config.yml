@@ -1,4 +1,5 @@
-baseurl: /blog
+site:
+  url: /blog
 exclude:
   - markdown
   - _config.yml
