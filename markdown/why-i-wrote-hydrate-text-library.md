@@ -841,7 +841,7 @@ The sizes were double-checked with [filesize](https://marketplace.visualstudio.c
 
 We miss `withTranslation`/`useTranslation` import costs, but I don't think it drastically changes the picture.
 
-## hydrate-text
+### hydrate-text
 
 In each case, check console results and sum up `dist/assets/index.<hash>.js` and `dist/assets/vendor.<hash>.js` sizes.
 

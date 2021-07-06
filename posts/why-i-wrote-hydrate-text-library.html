@@ -23,6 +23,32 @@
     <title>Why I wrote "hydrate-text" library</title>
   </head>
   <body>
+    <header>
+      <div class="header__content">
+        <div class="logo">
+          <a href="../" class="logo__link">
+            <img
+              src="../assets/favicon/favicon.svg"
+              width="48"
+              height="48"
+              class="logo__image"
+              alt="Logo"
+            />
+            Vasilii Kovalev's blog
+          </a>
+        </div>
+
+        <ul class="social-links">
+          <li class="social-link">
+            <a href="https://twitter.com/vasilii_kovalev">Twitter</a>
+          </li>
+          <li class="social-link">
+            <a href="https://github.com/vasilii-kovalev">GitHub</a>
+          </li>
+        </ul>
+      </div>
+    </header>
+
     <main>
       <h1>Why I wrote "hydrate-text" library</h1>
       <h2 id="internationalization-with-i18next">
@@ -937,7 +963,7 @@ hydrateRoute("/posts/:id", { id: 10 });</code></pre>
         We miss <code>withTranslation</code>/<code>useTranslation</code> import
         costs, but I don't think it drastically changes the picture.
       </p>
-      <h2 id="hydrate-text"><a href="#hydrate-text">hydrate-text</a></h2>
+      <h3 id="hydrate-text"><a href="#hydrate-text">hydrate-text</a></h3>
       <p>
         In each case, check console results and sum up
         <code>dist/assets/index.&#x3C;hash>.js</code> and
@@ -969,5 +995,12 @@ hydrateRoute("/posts/:id", { id: 10 });</code></pre>
         VS Code extension.
       </p>
     </main>
+
+    <footer>
+      Spotted a mistake? Post is too difficult to understand or incorrectly
+      written? Please, create an issue
+      <a href="https://github.com/vasilii-kovalev/blog/issues">here</a> and
+      let's discuss it!
+    </footer>
   </body>
 </html>

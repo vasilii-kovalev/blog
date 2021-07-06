@@ -1,13 +1,19 @@
 body {
   color: black;
+  display: flex;
+  flex-direction: column;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   line-height: 150%;
+  margin: 0;
+  min-height: 100vh;
 }
 
 main {
-  margin: 0 auto;
+  flex: 1 1 auto;
+  margin: 2em auto 1em;
   max-width: 800px;
+  padding: 0 8px;
 }
 
 h1 {
@@ -21,7 +27,6 @@ h4 a[href*="#"],
 h5 a[href*="#"],
 h6 a[href*="#"] {
   color: #2f333d;
-  position: relative;
   text-decoration: none;
 }
 
@@ -31,8 +36,6 @@ h4 a[href*="#"]::before,
 h5 a[href*="#"]::before,
 h6 a[href*="#"]::before {
   content: "#";
-  left: -16px;
-  position: absolute;
 }
 
 h2 a[href*="#"]:is(:hover, :focus),
@@ -62,10 +65,22 @@ code:not([data-language]) {
 }
 
 pre {
-  border-top-right-radius: 0;
+  /*
+    Kept as a fallback
+    TODO: remove when `:has` is working.
+  */
+  border-top-left-radius: 0;
   margin-top: 3em;
   padding: 16px;
   position: relative;
+}
+
+pre[data-path] {
+  border-top-right-radius: 0;
+}
+
+pre:has(code[data-language]) {
+  border-top-left-radius: 0;
 }
 
 pre[data-path]::before {
@@ -80,6 +95,7 @@ pre[data-path]::before {
 }
 
 code:not([data-language]) {
+  margin: 0 1px;
   padding: 4px 8px;
 }
 
@@ -100,4 +116,62 @@ code[data-language="JavaScript"]::before {
 
 code[data-language="TypeScript"]::before {
   border-bottom-color: #3178c6;
+}
+
+.header__content,
+.logo,
+.logo__link,
+.social-links {
+  align-items: center;
+  display: flex;
+}
+
+
+/*
+  Source: https://markus.oberlehner.net/blog/simple-solution-for-anchor-links-behind-sticky-headers#alternative-solution-with-scroll-padding-top
+
+  68px is `header`'s height.
+*/
+@media (min-height: 68px) {
+  html {
+    scroll-padding-top: 80px;
+  }
+}
+
+header {
+  background-color: white;
+  border-bottom: 4px solid #2f333d;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.header__content {
+  justify-content: space-between;
+  margin: 0 auto;
+  max-width: 800px;
+  padding: 8px;
+}
+
+.logo__image {
+  margin-right: 8px;
+}
+
+.social-links {
+  margin: 0;
+  padding: 0;
+}
+
+.social-link {
+  list-style: none;
+}
+
+.social-link + .social-link {
+  margin-left: 48px;
+}
+
+footer {
+  background-color: white;
+  border-top: 4px solid #2f333d;
+  padding: 8px;
 }
