@@ -1,10 +1,15 @@
 exclude:
+  - lib
   - markdown
   - _config.yml
   - .editorconfig
+  - .eslintrc
   - .gitignore
   - .prettierrc
+  - .stylelintignore
+  - .stylelintrc
   - LICENSE
   - package.json
   - README.md
+  - tsconfig.json
   - yarn.lock
