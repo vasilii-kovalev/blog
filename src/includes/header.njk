@@ -1,0 +1,20 @@
+<header class="header">
+  {% if page.url === "/" %}
+    <span class="header__logo header__logo--text">
+      Vasilii Kovalev's blog (WIP)
+    </span>
+  {% else %}
+    <a href="{{ '/' | url }}" class="header__logo">
+      Vasilii Kovalev's blog (WIP)
+    </a>
+  {% endif %}
+
+  <ul class="social-links">
+    <li class="social-links__link">
+      <a href="https://twitter.com/vasilii_kovalev">Twitter</a>
+    </li>
+    <li class="social-links__link">
+      <a href="https://github.com/vasilii-kovalev">GitHub</a>
+    </li>
+  </ul>
+</header>

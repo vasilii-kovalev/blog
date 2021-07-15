@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="{{ language | default("en") }}">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta name="description" content="{{ description }}" />
+
+    <link
+      rel="icon"
+      href="{{ '/favicon.ico' | url }}"
+    />
+    <link
+      rel="icon"
+      href="{{ '/assets/favicon/favicon.svg' | url }}"
+      type="image/svg+xml"
+    />
+    <link
+      rel="apple-touch-icon"
+      href="{{ '/assets/favicon/apple-touch-icon.png' | url }}"
+    />
+    <link rel="manifest" href="{{ '/assets/manifest.webmanifest' | url }}" />
+
+    <title>
+      {{ title }} | Vasilii Kovalev's blog
+    </title>
+
+    {% set normalize %}
+      {% include "../styles/normalize.css" %}
+    {% endset %}
+
+    <style>
+      {{ normalize | cssmin | safe }}
+    </style>
+
+    {% set common %}
+      {% include "../styles/common.css" %}
+    {% endset %}
+
+    <style>
+      {{ common | cssmin | safe }}
+    </style>
+
+    {% set specific %}
+      {% include "../styles/" + styles %}
+    {% endset %}
+
+    <style>
+      {{ specific | cssmin | safe }}
+    </style>
+  </head>
+
+  <body>
+    {{ content | safe }}
+  </body>
+</html>

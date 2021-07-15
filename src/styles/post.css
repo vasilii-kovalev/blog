@@ -1,0 +1,61 @@
+:is(h2, h3, h4, h5, h6):focus-visible {
+  outline: none;
+}
+
+a[href*="#"]:not(.header-anchor) {
+  font-style: italic;
+}
+
+code:not([class*="language"]) {
+  border: 1px solid var(--text-color);
+  border-radius: 2px;
+  font-size: 85%;
+  margin: 0 1px;
+  padding: 1px 3px;
+}
+
+pre {
+  border: 2px solid var(--text-color);
+  border-radius: var(--border-radius);
+  color: var(--text-color);
+  overflow-x: auto;
+  padding: 12px;
+}
+
+a:is(:hover, :focus) code:not([class*=language]) {
+  border-color: transparent;
+}
+
+.header-anchor::before {
+  content: "#";
+}
+
+.code-header {
+  background-color: var(--text-color);
+  border: 2px solid var(--text-color);
+  border-bottom: none;
+  border-top-left-radius: var(--border-radius);
+  border-top-right-radius: var(--border-radius);
+  color: var(--background-color);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  font-family: monospace, monospace;
+  justify-content: space-between;
+  padding: 4px;
+}
+
+.code-header__file {
+  font-size: 75%;
+  word-break: break-word;
+}
+
+.code-header + pre {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  margin-top: 0;
+}
+
+.footer {
+  padding-bottom: 2em;
+}

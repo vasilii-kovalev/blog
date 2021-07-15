@@ -1,0 +1,25 @@
+---
+title: Home
+description: Vasilii Kovalev's blog home page
+layout: page.njk
+permalink: index.html
+styles: home.css
+---
+
+{% include 'header.njk' %}
+
+<main>
+  <h1>Welcome to Vasilii Kovalev's blog!</h1>
+
+  <h2>Posts:</h2>
+
+  <ul>
+    {% for post in collections.all %}
+      {% if post.url !== "/" %}
+        <li>
+          <a href="{{ post.url | url }}">{{ post.data.title }}</a>
+        </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+</main>
