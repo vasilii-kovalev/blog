@@ -1,0 +1,53 @@
+<svg
+  version="1.1"
+  baseProfile="full"
+  width="128"
+  height="128"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <style>
+    @media (prefers-color-scheme: dark) {
+      .background {
+        fill: black;
+      }
+
+      .foreground {
+        fill: white;
+      }
+    }
+  </style>
+  <rect
+    x="0"
+    y="0"
+    width="128"
+    height="128"
+    fill="white"
+    class="background"
+  />
+  <rect
+    x="16"
+    y="96"
+    width="96"
+    height="16"
+    fill="black"
+    class="foreground"
+  />
+  <rect
+    x="-2"
+    y="60"
+    width="88"
+    height="16"
+    fill="black"
+    class="foreground"
+    transform="rotate(65 42 68)"
+  />
+  <rect
+    x="42"
+    y="60"
+    width="88"
+    height="16"
+    fill="black"
+    class="foreground"
+    transform="rotate(-65 86 68)"
+  />
+</svg>
