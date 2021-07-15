@@ -28,6 +28,8 @@
     "stylelint:fix": "stylelint src/**/*.css --color --fix",
     "prettier:check": "prettier --check .",
     "prettier:fix": "prettier --write .",
+    "lint:check": "yarn prettier:check && yarn stylelint:check",
+    "lint:fix": "yarn prettier:fix && yarn stylelint:fix",
     "build": "eleventy --pathprefix blog",
     "publish": "yarn build && gh-pages -d dist"
   },

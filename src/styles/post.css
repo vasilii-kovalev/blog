@@ -22,7 +22,7 @@ pre {
   padding: 12px;
 }
 
-a:is(:hover, :focus) code:not([class*=language]) {
+a:is(:hover, :focus) code:not([class*="language"]) {
   border-color: transparent;
 }
 
