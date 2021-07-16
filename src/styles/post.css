@@ -1,3 +1,7 @@
+h1 {
+  margin-bottom: 0.25em;
+}
+
 :is(h2, h3, h4, h5, h6):focus-visible {
   outline: none;
 }
@@ -26,6 +30,10 @@ a:is(:hover, :focus) code:not([class*="language"]) {
   border-color: transparent;
 }
 
+.published-date {
+  font-size: 90%;
+}
+
 .header-anchor::before {
   content: "#";
 }
@@ -43,6 +51,11 @@ a:is(:hover, :focus) code:not([class*="language"]) {
   font-family: monospace, monospace;
   justify-content: space-between;
   padding: 4px;
+}
+
+.code-header ::selection {
+  background-color: var(--background-color);
+  color: var(--text-color);
 }
 
 .code-header__file {

@@ -2,11 +2,7 @@
 title: Why I wrote "hydrate‑text" library
 description: A post about why I wrote "hydrate‑text" library
 layout: post.njk
-topics:
-  - reasoning
-  - technologies
-published: 2021-07-06
-edited: 2021-07-15
+published: "2021-07-06"
 ---
 
 ## Internationalization with i18next

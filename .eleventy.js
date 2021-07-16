@@ -37,6 +37,17 @@ module.exports = config => {
 
   config.setLibrary("md", markdownLibrary);
 
+  // Filters
+  config.addFilter("date", dateString => {
+    const date = new Date(dateString);
+
+    return date.toLocaleString("en", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+  });
+
   // Minify HTML
   config.addTransform("htmlmin", (content, outputPath) => {
     if (outputPath?.endsWith(".html")) {

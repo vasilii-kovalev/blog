@@ -49,7 +49,8 @@ a:is(:hover, :focus) {
   background-color: var(--text-color);
   border-radius: 2px;
   color: var(--background-color);
-  outline: none;
+  outline: 2px dashed var(--text-color);
+  outline-offset: 2px;
   text-decoration: none;
 }
 
@@ -75,4 +76,9 @@ ul {
 
 .social-links__link + .social-links__link {
   margin-left: 24px;
+}
+
+::selection {
+  background-color: var(--text-color);
+  color: var(--background-color);
 }
