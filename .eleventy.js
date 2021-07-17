@@ -18,21 +18,40 @@ module.exports = config => {
   config.addPassthroughCopy({ "src/assets/**/*.ico": "/" });
 
   // Shortcodes
-  config.addShortcode("codeheader", (language, file) => {
-    if (file === undefined) {
-      return `<div class="code-header">
-          <span class="code-header__language">
-            ${language}
-          </span>
-        </div>`;
+  config.addPairedShortcode("logo", (title, homeUrl, isHomePage) => {
+    if (isHomePage) {
+      return `<span class="header__logo header__logo--text">
+        ${title}
+      </span>`;
     }
 
-    return `<div class="code-header">
-        <span class="code-header__language">
-          ${language}
-        </span>
-        <span class="code-header__file">${file}</span>
-      </div>`;
+    return `<a href="${homeUrl}" class="header__logo">
+      ${title}
+    </a>`;
+  });
+
+  config.addPairedShortcode("codeblock", (snippet, language, file) => {
+    if (file === undefined) {
+      return `<figure aria-label="A block of code" class="code-block">
+        <figcaption class="code-block__header code-header">
+          <dl class="code-header__info">
+            <dt class="visually-hidden">Language</dt>
+            <dd class="code-header__language">${language}</dd>
+          </dl>
+        </figcaption>
+        ${snippet}</figure>`;
+    }
+
+    return `<figure aria-label="A block of code" class="code-block">
+      <figcaption class="code-block__header code-header">
+        <dl class="code-header__info">
+          <dt class="visually-hidden">Language</dt>
+          <dd class="code-header__language">${language}</dd>
+          <dt class="visually-hidden">File</dt>
+          <dd class="code-header__file">${file}</dd>
+        </dl>
+      </figcaption>
+      ${snippet}</figure>`;
   });
 
   // Libraries

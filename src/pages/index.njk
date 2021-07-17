@@ -4,6 +4,7 @@ description: Vasilii Kovalev's blog home page
 layout: page.njk
 permalink: index.html
 styles: home.css
+home: true
 ---
 
 {% include 'header.njk' %}
@@ -14,12 +15,10 @@ styles: home.css
   <h2>Posts:</h2>
 
   <ul>
-    {% for post in collections.all %}
-      {% if post.url !== "/" %}
-        <li>
-          <a href="{{ post.url | url }}">{{ post.data.title }}</a>
-        </li>
-      {% endif %}
+    {% for post in collections.post %}
+      <li>
+        <a href="{{ post.url | url }}">{{ post.data.title }}</a>
+      </li>
     {% endfor %}
   </ul>
 </main>

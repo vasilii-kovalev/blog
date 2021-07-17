@@ -6,10 +6,13 @@ h1 {
   outline: none;
 }
 
+code {
+  font-size: 85%;
+}
+
 code:not([class*="language"]) {
   border: 1px solid var(--text-color);
   border-radius: 2px;
-  font-size: 85%;
   margin: 0 1px;
   padding: 1px 3px;
 }
@@ -34,6 +37,10 @@ pre {
   content: "#";
 }
 
+.code-block {
+  margin: 0;
+}
+
 .code-header {
   background-color: var(--text-color);
   border: 2px solid var(--text-color);
@@ -54,6 +61,15 @@ pre {
   color: var(--text-color);
 }
 
+.code-header__info {
+  margin: 0;
+}
+
+.code-header__language,
+.code-header__file {
+  margin-inline-start: 0;
+}
+
 .code-header__file {
   font-size: 75%;
   word-break: break-word;
@@ -67,4 +83,14 @@ pre {
 
 .footer {
   padding-bottom: 2em;
+}
+
+.visually-hidden {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
 }

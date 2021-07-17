@@ -1,13 +1,7 @@
 <header class="header">
-  {% if page.url === "/" %}
-    <span class="header__logo header__logo--text">
-      Vasilii Kovalev's blog
-    </span>
-  {% else %}
-    <a href="{{ '/' | url }}" class="header__logo">
-      Vasilii Kovalev's blog
-    </a>
-  {% endif %}
+  {% logo "/" | url, home %}
+    Vasilii Kovalev's blog
+  {% endlogo %}
 
   <ul class="social-links">
     <li class="social-links__link">

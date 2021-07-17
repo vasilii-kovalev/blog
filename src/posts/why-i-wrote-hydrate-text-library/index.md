@@ -3,6 +3,8 @@ title: Why I wrote "hydrate‑text" library
 description: A post about why I wrote "hydrate‑text" library
 layout: post.njk
 published: "2021-07-06"
+tags:
+  - post
 ---
 
 ## Internationalization with i18next
@@ -11,7 +13,7 @@ On one of my projects at work, we used [i18next](https://www.i18next.com/) libra
 
 - Define an `i18next` instance
 
-  {% codeheader "JavaScript", "src/i18n/index.js" %}
+  {% codeblock "JavaScript", "src/i18n/index.js" %}
 
   ```javascript
   import i18n from "i18next";
@@ -50,9 +52,11 @@ On one of my projects at work, we used [i18next](https://www.i18next.com/) libra
   export default i18n;
   ```
 
+  {% endcodeblock %}
+
 - Define the resources
 
-  {% codeheader "JavaScript", "src/i18n/locales/index.js" %}
+  {% codeblock "JavaScript", "src/i18n/locales/index.js" %}
 
   ```javascript
   export { en } from "./en";
@@ -60,7 +64,9 @@ On one of my projects at work, we used [i18next](https://www.i18next.com/) libra
   // ... other locales
   ```
 
-  {% codeheader "JavaScript", "src/i18n/locales/en/index.js" %}
+  {% endcodeblock %}
+
+  {% codeblock "JavaScript", "src/i18n/locales/en/index.js" %}
 
   ```javascript
   import errors from "./errors.json";
@@ -74,7 +80,9 @@ On one of my projects at work, we used [i18next](https://www.i18next.com/) libra
   export { en };
   ```
 
-  {% codeheader "JSON", "src/i18n/locales/en/errors.json" %}
+  {% endcodeblock %}
+
+  {% codeblock "JSON", "src/i18n/locales/en/errors.json" %}
 
   ```json
   {
@@ -108,7 +116,9 @@ On one of my projects at work, we used [i18next](https://www.i18next.com/) libra
   }
   ```
 
-  {% codeheader "JavaScript", "src/i18n/locales/ru/index.js" %}
+  {% endcodeblock %}
+
+  {% codeblock "JavaScript", "src/i18n/locales/ru/index.js" %}
 
   ```javascript
   import errors from "./errors.json";
@@ -122,7 +132,9 @@ On one of my projects at work, we used [i18next](https://www.i18next.com/) libra
   export { ru };
   ```
 
-  {% codeheader "JSON", "src/i18n/locales/ru/errors.json" %}
+  {% endcodeblock %}
+
+  {% codeblock "JSON", "src/i18n/locales/ru/errors.json" %}
 
   ```json
   {
@@ -156,9 +168,11 @@ On one of my projects at work, we used [i18next](https://www.i18next.com/) libra
   }
   ```
 
+  {% endcodeblock %}
+
 - Import the `i18n` instance
 
-  {% codeheader "JavaScript", "src/main.jsx" %}
+  {% codeblock "JavaScript", "src/main.jsx" %}
 
   ```javascript
   import * as React from "react";
@@ -175,9 +189,11 @@ On one of my projects at work, we used [i18next](https://www.i18next.com/) libra
   );
   ```
 
+  {% endcodeblock %}
+
 - Pass the translation function to a component via special HOC/React Hook
 
-  {% codeheader "JavaScript", "src/components/app.jsx" %}
+  {% codeblock "JavaScript", "src/components/app.jsx" %}
 
   ```javascript
   import * as React from "react";
@@ -201,9 +217,11 @@ On one of my projects at work, we used [i18next](https://www.i18next.com/) libra
   export { AppWithTranslation as App };
   ```
 
+  {% endcodeblock %}
+
   Or
 
-  {% codeheader "JavaScript", "src/components/app.jsx" %}
+  {% codeblock "JavaScript", "src/components/app.jsx" %}
 
   ```javascript
   import * as React from "react";
@@ -227,6 +245,8 @@ On one of my projects at work, we used [i18next](https://www.i18next.com/) libra
   export { App };
   ```
 
+  {% endcodeblock %}
+
 Either way, the component gets the `t` function. The function accepts a path to a localization string (see JSON files above), and an object with variables, which are put in the slots (defined in double curly braces) in the string.
 
 The full source code is available here: [link](https://github.com/vasilii-kovalev/react-internationalization-i18next).
@@ -247,7 +267,7 @@ I like the API of the `t` function (path to a localization string and a bunch of
 
 - Define supported languages and a default one
 
-  {% codeheader "TypeScript", "src/i18n/constants.ts" %}
+  {% codeblock "TypeScript", "src/i18n/constants.ts" %}
 
   ```typescript
   const SUPPORTED_LANGUAGES_MAP = {
@@ -261,9 +281,11 @@ I like the API of the `t` function (path to a localization string and a bunch of
   export { DEFAULT_SELECTED_LANGUAGE, SUPPORTED_LANGUAGES_MAP };
   ```
 
+  {% endcodeblock %}
+
 - Define a "dictionary" (a structure, that will be used to type checking our localization resources)
 
-  {% codeheader "TypeScript", "src/i18n/dictionary/index.ts" %}
+  {% codeblock "TypeScript", "src/i18n/dictionary/index.ts" %}
 
   ```typescript
   import { errors } from "./errors";
@@ -277,7 +299,9 @@ I like the API of the `t` function (path to a localization string and a bunch of
   export { dictionary };
   ```
 
-  {% codeheader "TypeScript", "src/i18n/dictionary/errors.ts" %}
+  {% endcodeblock %}
+
+  {% codeblock "TypeScript", "src/i18n/dictionary/errors.ts" %}
 
   ```typescript
   const errors = {
@@ -313,11 +337,13 @@ I like the API of the `t` function (path to a localization string and a bunch of
   export { errors };
   ```
 
+  {% endcodeblock %}
+
   `as const` expressions require all the resources to strictly follow the structure.
 
   **Note:** it can be hard to fill in these strings manually, so I just assign empty strings to them and pass the whole structure to this function below.
 
-  {% codeheader "JavaScript" %}
+  {% codeblock "JavaScript" %}
 
   ```javascript
   const fillTreePaths = (treeWithEmptyPaths, namespace = "") => {
@@ -416,9 +442,11 @@ I like the API of the `t` function (path to a localization string and a bunch of
   );
   ```
 
+  {% endcodeblock %}
+
 - Define types for the resources
 
-  {% codeheader "TypeScript", "src/i18n/types.ts" %}
+  {% codeblock "TypeScript", "src/i18n/types.ts" %}
 
   ```typescript
   import { SUPPORTED_LANGUAGES_MAP } from "./constants";
@@ -449,9 +477,11 @@ I like the API of the `t` function (path to a localization string and a bunch of
   export type { Dictionaries, Dictionary, SupportedLanguage };
   ```
 
+  {% endcodeblock %}
+
 - Define the resources (I called them `dictionaries` for consistency) for the supported languages
 
-  {% codeheader "TypeScript", "src/i18n/dictionaries/index.ts" %}
+  {% codeblock "TypeScript", "src/i18n/dictionaries/index.ts" %}
 
   ```typescript
   import { Dictionaries } from "../types";
@@ -469,7 +499,9 @@ I like the API of the `t` function (path to a localization string and a bunch of
   export { dictionaries };
   ```
 
-  {% codeheader "TypeScript", "src/i18n/dictionaries/en/index.ts" %}
+  {% endcodeblock %}
+
+  {% codeblock "TypeScript", "src/i18n/dictionaries/en/index.ts" %}
 
   ```typescript
   import { Dictionary } from "i18n/types";
@@ -485,7 +517,9 @@ I like the API of the `t` function (path to a localization string and a bunch of
   export { englishDictionary };
   ```
 
-  {% codeheader "TypeScript", "src/i18n/dictionaries/en/errors.ts" %}
+  {% endcodeblock %}
+
+  {% codeblock "TypeScript", "src/i18n/dictionaries/en/errors.ts" %}
 
   ```typescript
   import { Dictionary } from "i18n/types";
@@ -524,7 +558,9 @@ I like the API of the `t` function (path to a localization string and a bunch of
   export { errors };
   ```
 
-  {% codeheader "TypeScript", "src/i18n/dictionaries/ru/index.ts" %}
+  {% endcodeblock %}
+
+  {% codeblock "TypeScript", "src/i18n/dictionaries/ru/index.ts" %}
 
   ```typescript
   import { Dictionary } from "i18n/types";
@@ -540,7 +576,9 @@ I like the API of the `t` function (path to a localization string and a bunch of
   export { russianDictionary };
   ```
 
-  {% codeheader "TypeScript", "src/i18n/dictionaries/ru/errors.ts" %}
+  {% endcodeblock %}
+
+  {% codeblock "TypeScript", "src/i18n/dictionaries/ru/errors.ts" %}
 
   ```typescript
   import { Dictionary } from "i18n/types";
@@ -578,9 +616,11 @@ I like the API of the `t` function (path to a localization string and a bunch of
   export { errors };
   ```
 
+  {% endcodeblock %}
+
 - Create i18n context, context provider and React Hook
 
-  {% codeheader "TypeScript", "src/i18n/context.tsx" %}
+  {% codeblock "TypeScript", "src/i18n/context.tsx" %}
 
   ```typescript
   import { HydrateText } from "hydrate-text";
@@ -643,7 +683,9 @@ I like the API of the `t` function (path to a localization string and a bunch of
   export { I18nContext, I18nProvider, useI18n };
   ```
 
-  {% codeheader "TypeScript", "src/i18n/utils.ts" %}
+  {% endcodeblock %}
+
+  {% codeblock "TypeScript", "src/i18n/utils.ts" %}
 
   ```typescript
   import { HydrateText, hydrateText } from "hydrate-text";
@@ -673,9 +715,11 @@ I like the API of the `t` function (path to a localization string and a bunch of
   export { textResolver, isSupportedLanguage };
   ```
 
+  {% endcodeblock %}
+
 - Wrap the application in the context provider
 
-  {% codeheader "TypeScript", "src/main.tsx" %}
+  {% codeblock "TypeScript", "src/main.tsx" %}
 
   ```typescript
   import * as React from "react";
@@ -695,9 +739,11 @@ I like the API of the `t` function (path to a localization string and a bunch of
   );
   ```
 
+  {% endcodeblock %}
+
 - Use the React Hook to get the translation function
 
-  {% codeheader "TypeScript", "src/app.tsx" %}
+  {% codeblock "TypeScript", "src/app.tsx" %}
 
   ```typescript
   import * as React from "react";
@@ -723,6 +769,8 @@ I like the API of the `t` function (path to a localization string and a bunch of
   export { App };
   ```
 
+  {% endcodeblock %}
+
 The full source code is available here: [link](https://github.com/vasilii-kovalev/react-internationalization-hydrate-text).
 
 Now all the problems are solved:
@@ -737,7 +785,7 @@ Even if localization is not necessary, I believe it is still a good idea to keep
 
 - Define a text constant
 
-  {% codeheader "TypeScript", "src/constants/text/errors.ts" %}
+  {% codeblock "TypeScript", "src/constants/text/errors.ts" %}
 
   ```typescript
   const ERRORS_TEXT = {
@@ -772,9 +820,11 @@ Even if localization is not necessary, I believe it is still a good idea to keep
   };
   ```
 
+  {% endcodeblock %}
+
 - Use `hydrate‑text` to provide the text with variables
 
-  {% codeheader "TypeScript", "src/app.tsx" %}
+  {% codeblock "TypeScript", "src/app.tsx" %}
 
   ```typescript
   import { hydrateText } from "hydrate-text";
@@ -798,11 +848,13 @@ Even if localization is not necessary, I believe it is still a good idea to keep
   export { App };
   ```
 
+  {% endcodeblock %}
+
 ## Replacing route variables
 
 In some cases, it is necessary to provide [React Router](https://reactrouter.com/) routes with variables, like this:
 
-{% codeheader "TypeScript" %}
+{% codeblock "TypeScript" %}
 
 ```typescript
 // Given
@@ -812,9 +864,11 @@ In some cases, it is necessary to provide [React Router](https://reactrouter.com
 "/posts/10";
 ```
 
+{% endcodeblock %}
+
 To achieve this, an ability to replace default variable markers was added. In the source code it is called "interpolation options" (this name was taken from `i18next` ["Interpolation" page](https://www.i18next.com/translation-function/interpolation#additional-options)):
 
-{% codeheader "TypeScript" %}
+{% codeblock "TypeScript" %}
 
 ```typescript
 // "/posts/10"
@@ -828,9 +882,11 @@ hydrateText(
 );
 ```
 
+{% endcodeblock %}
+
 If it is necessary to do this in several places, it is better to use another function from `hydrate‑text` - `configureHydrateText`, which will return `hydrateText` function bound to the chosen variable markers:
 
-{% codeheader "TypeScript" %}
+{% codeblock "TypeScript" %}
 
 ```typescript
 const hydrateRoute = configureHydrateText({
@@ -842,13 +898,15 @@ const hydrateRoute = configureHydrateText({
 hydrateRoute("/posts/:id", { id: 10 });
 ```
 
+{% endcodeblock %}
+
 The markers still can be changed via the third argument, but I can hardly imagine, when it can be useful 🙂
 
 Later on I found a built-in function [generatePath](https://reactrouter.com/web/api/generatePath), but the examples above are still valid as an illustration of the variable markers changing flexibility.
 
 ## Measuring application sizes
 
-### i18next
+### i18next approach
 
 In each case, check console results and sum up `dist/assets/index.<hash>.js` and `dist/assets/vendor.<hash>.js` sizes.
 
@@ -859,7 +917,7 @@ The sizes were double-checked with [filesize](https://marketplace.visualstudio.c
 
 We miss `withTranslation`/`useTranslation` import costs, but I don't think it drastically changes the picture.
 
-### hydrate‑text
+### hydrate‑text approach
 
 In each case, check console results and sum up `dist/assets/index.<hash>.js` and `dist/assets/vendor.<hash>.js` sizes.
 

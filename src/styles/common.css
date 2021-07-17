@@ -1,7 +1,7 @@
 :root {
   --color-dark: #202124;
   --color-light: white;
-  --border-radius: 4px;
+  --border-radius: 2px;
   --text-color: var(--color-dark);
   --background-color: var(--color-light);
 }
