@@ -1,13 +1,15 @@
 :root {
-  --text-color: black;
-  --background-color: white;
+  --color-dark: #202124;
+  --color-light: white;
   --border-radius: 4px;
+  --text-color: var(--color-dark);
+  --background-color: var(--color-light);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --text-color: #d7dae0;
-    --background-color: #202124;
+    --text-color: var(--color-light);
+    --background-color: var(--color-dark);
   }
 }
 
@@ -42,7 +44,7 @@ h2 {
 }
 
 a {
-  color: var(--textLink);
+  color: var(--text-color);
 }
 
 a:is(:hover, :focus) {
