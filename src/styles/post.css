@@ -6,10 +6,6 @@ h1 {
   outline: none;
 }
 
-a[href*="#"]:not(.header-anchor) {
-  font-style: italic;
-}
-
 code:not([class*="language"]) {
   border: 1px solid var(--text-color);
   border-radius: 2px;
@@ -18,16 +14,16 @@ code:not([class*="language"]) {
   padding: 1px 3px;
 }
 
+a:is(:hover, :focus) code:not([class*="language"]) {
+  border-color: transparent;
+}
+
 pre {
   border: 2px solid var(--text-color);
   border-radius: var(--border-radius);
   color: var(--text-color);
   overflow-x: auto;
   padding: 12px;
-}
-
-a:is(:hover, :focus) code:not([class*="language"]) {
-  border-color: transparent;
 }
 
 .published-date {
