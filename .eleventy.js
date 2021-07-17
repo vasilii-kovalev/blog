@@ -2,14 +2,21 @@ const fs = require("fs");
 
 const cleanCSS = require("clean-css");
 const htmlmin = require("html-minifier");
-const anchor = require("markdown-it-anchor");
 const markdown = require("markdown-it");
+const anchor = require("markdown-it-anchor");
 
 const OUTPUT_DIRECTORY_NAME = "dist";
 
-fs.rmSync(OUTPUT_DIRECTORY_NAME, { force: true, recursive: true });
+fs.rmSync(OUTPUT_DIRECTORY_NAME, {
+  force: true,
+  recursive: true,
+});
 
 module.exports = config => {
+  // Copying files
+  config.addPassthroughCopy("src/assets/**/*.{webmanifest,png,svg}");
+  config.addPassthroughCopy({ "src/assets/**/*.ico": "/" });
+
   // Shortcodes
   config.addShortcode("codeheader", (language, file) => {
     if (file === undefined) {
@@ -30,6 +37,7 @@ module.exports = config => {
 
   // Libraries
   const markdownLibrary = markdown({
+    // Otherwise shortcodes don't work
     html: true,
   }).use(anchor, {
     permalink: anchor.permalink.headerLink(),
@@ -79,6 +87,6 @@ module.exports = config => {
     },
     htmlTemplateEngine: "njk",
     markdownTemplateEngine: "njk",
-    templateFormats: ["md", "njk", "webmanifest", "jpg", "png", "svg", "ico"],
+    templateFormats: ["md", "njk"],
   };
 };
