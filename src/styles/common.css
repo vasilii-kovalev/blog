@@ -37,13 +37,17 @@ a {
   color: var(--text-color);
 }
 
-a:is(:hover, :focus) {
+a:hover,
+a:focus {
   background-color: var(--text-color);
-  border-radius: 2px;
   color: var(--background-color);
+  text-decoration: none;
+}
+
+a:focus {
+  border-radius: 2px;
   outline: 2px dashed var(--text-color);
   outline-offset: 2px;
-  text-decoration: none;
 }
 
 ul {
