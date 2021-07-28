@@ -66,12 +66,10 @@ ul {
 }
 
 .social-links {
+  column-gap: 24px;
   list-style: none;
   padding: 0;
-}
-
-.social-links__link + .social-links__link {
-  margin-left: 24px;
+  row-gap: 0.25em;
 }
 
 ::selection {

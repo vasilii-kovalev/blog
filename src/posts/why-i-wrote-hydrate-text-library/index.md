@@ -249,7 +249,7 @@ On one of my projects at work, we used [i18next](https://www.i18next.com/) libra
 
 Either way, the component gets the `t` function. The function accepts a path to a localization string (see JSON files above), and an object with variables, which are put in the slots (defined in double curly braces) in the string.
 
-The full source code is available here: [link](https://github.com/vasilii-kovalev/react-internationalization-i18next).
+[Link to full source code](https://github.com/vasilii-kovalev/react-internationalization-i18next).
 
 ## The problems
 
@@ -771,7 +771,7 @@ I like the API of the `t` function (path to a localization string and a bunch of
 
   {% endcodeblock %}
 
-The full source code is available here: [link](https://github.com/vasilii-kovalev/react-internationalization-hydrate-text).
+[Link to full source code](https://github.com/vasilii-kovalev/react-internationalization-hydrate-text).
 
 Now all the problems are solved:
 
@@ -913,9 +913,9 @@ In each case, check console results and sum up `dist/assets/index.<hash>.js` and
 1. Build the application as is: **1.34&nbsp;KiB + 181.54&nbsp;KiB**.
 2. Replace `<App />` by `null`, comment out `i18n` and `App` imports and build the application: **0.14&nbsp;KiB + 127.59&nbsp;KiB**.
 
-The sizes were double-checked with [filesize](https://marketplace.visualstudio.com/items?itemName=mkxml.vscode-filesize) VS Code extension.
+The sizes were double-checked with [filesize VS Code extension](https://marketplace.visualstudio.com/items?itemName=mkxml.vscode-filesize).
 
-We miss `withTranslation`/`useTranslation` import costs, but I don't think it drastically changes the picture.
+We miss `withTranslation` and `useTranslation` import costs, but I don't think it drastically changes the picture.
 
 ### hydrate‑text approach
 
@@ -925,4 +925,4 @@ In each case, check console results and sum up `dist/assets/index.<hash>.js` and
 2. Replace `get(dictionary, pathOrText, pathOrText)` by `pathOrText`, comment out `get` import and build the application: **1.25&nbsp;KiB + 128.01&nbsp;KiB**.
 3. Replace `<I18nProvider><App /></I18nProvider>` by `null`, comment out `I18nProvider` and `App` imports and build the application: **0.14&nbsp;KiB + 127.59&nbsp;KiB**.
 
-The sizes were double-checked with [filesize](https://marketplace.visualstudio.com/items?itemName=mkxml.vscode-filesize) VS Code extension.
+The sizes were double-checked with [filesize VS Code extension](https://marketplace.visualstudio.com/items?itemName=mkxml.vscode-filesize).
