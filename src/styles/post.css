@@ -10,6 +10,19 @@ code {
 	font-size: 85%;
 }
 
+code[class*="language"] {
+	--tab-size: 2;
+
+	tab-size: var(--tab-size);
+	transition: tab-size 0.2s;
+}
+
+@media (min-width: 640px) {
+	code[class*="language"] {
+		--tab-size: 4;
+	}
+}
+
 code:not([class*="language"]) {
 	border: 1px solid var(--text-color);
 	border-radius: 2px;
