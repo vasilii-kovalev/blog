@@ -63,8 +63,7 @@ pre {
 	border-top-right-radius: var(--border-radius);
 	color: var(--background-color);
 	display: flex;
-	flex-direction: column;
-	flex-wrap: wrap;
+	flex-flow: column wrap;
 	font-family: monospace, monospace;
 	justify-content: space-between;
 	padding: 4px;
