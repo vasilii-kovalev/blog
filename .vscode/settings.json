@@ -1,0 +1,7 @@
+{
+	"markdownlint.config": {
+		"no-hard-tabs": {
+			"code_blocks": false
+		}
+	}
+}
