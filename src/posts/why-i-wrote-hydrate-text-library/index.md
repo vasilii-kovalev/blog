@@ -4,7 +4,7 @@ description: A post about why I wrote "hydrate‑text" library
 layout: post.njk
 published: "2021-07-06"
 tags:
-  - post
+	- post
 ---
 
 ## Internationalization with i18next
@@ -21,33 +21,33 @@ On one of my projects at work, we used [i18next](https://www.i18next.com/) libra
   import LanguageDetector from "i18next-browser-languagedetector";
 
   import {
-    en,
-    ru,
-    // ... other locales
+  	en,
+  	ru,
+  	// ... other locales
   } from "./locales";
 
   const resources = {
-    en,
-    ru,
-    // ... other locales
+  	en,
+  	ru,
+  	// ... other locales
   };
 
   i18n
-    .use(LanguageDetector)
-    .use(initReactI18next)
-    .init({
-      detection: {
-        lookupQuerystring: "lng",
-        order: ["querystring"],
-      },
+  	.use(LanguageDetector)
+  	.use(initReactI18next)
+  	.init({
+  		detection: {
+  			lookupQuerystring: "lng",
+  			order: ["querystring"],
+  		},
 
-      fallbackLng: "en",
-      interpolation: {
-        // Not needed for React
-        escapeValue: false,
-      },
-      resources,
-    });
+  		fallbackLng: "en",
+  		interpolation: {
+  			// Not needed for React
+  			escapeValue: false,
+  		},
+  		resources,
+  	});
 
   export default i18n;
   ```
@@ -73,8 +73,8 @@ On one of my projects at work, we used [i18next](https://www.i18next.com/) libra
   // ... other namespaces
 
   const en = {
-    errors,
-    // ... other namespaces
+  	errors,
+  	// ... other namespaces
   };
 
   export { en };
@@ -86,33 +86,33 @@ On one of my projects at work, we used [i18next](https://www.i18next.com/) libra
 
   ```json
   {
-    "validation": {
-      "field": {
-        "is": {
-          "empty": "This field is required",
-          "incorrect": {
-            "password": "Password is incorrect"
-          },
-          "invalid": {
-            "common": "Please enter a valid value",
-            "email": "Please enter a valid email address"
-          }
-        },
-        "length": {
-          "lessThan": "This field should contain at least {{minLength}} characters",
-          "moreThan": "This field should contain no more than {{maxLength}} characters"
-        }
-      },
-      "fields": {
-        "are": {
-          "not": {
-            "equal": {
-              "password": "Passwords don't match"
-            }
-          }
-        }
-      }
-    }
+  	"validation": {
+  		"field": {
+  			"is": {
+  				"empty": "This field is required",
+  				"incorrect": {
+  					"password": "Password is incorrect"
+  				},
+  				"invalid": {
+  					"common": "Please enter a valid value",
+  					"email": "Please enter a valid email address"
+  				}
+  			},
+  			"length": {
+  				"lessThan": "This field should contain at least {{minLength}} characters",
+  				"moreThan": "This field should contain no more than {{maxLength}} characters"
+  			}
+  		},
+  		"fields": {
+  			"are": {
+  				"not": {
+  					"equal": {
+  						"password": "Passwords don't match"
+  					}
+  				}
+  			}
+  		}
+  	}
   }
   ```
 
@@ -125,8 +125,8 @@ On one of my projects at work, we used [i18next](https://www.i18next.com/) libra
   // ... other namespaces
 
   const ru = {
-    errors,
-    // ... other namespaces
+  	errors,
+  	// ... other namespaces
   };
 
   export { ru };
@@ -138,33 +138,33 @@ On one of my projects at work, we used [i18next](https://www.i18next.com/) libra
 
   ```json
   {
-    "validation": {
-      "field": {
-        "is": {
-          "empty": "Это поле является обязательным для заполнения",
-          "incorrect": {
-            "password": "Неверный пароль"
-          },
-          "invalid": {
-            "common": "Пожалуйста, введите корректное значение",
-            "email": "Пожалуйста, введите корректный адрес электронной почты"
-          }
-        },
-        "length": {
-          "lessThan": "Это поле должно состоять минимум из {{minLength}} символов",
-          "moreThan": "Это поле должно состоять максимум из {{maxLength}} символов"
-        }
-      },
-      "fields": {
-        "are": {
-          "not": {
-            "equal": {
-              "password": "Пароли не совпадают"
-            }
-          }
-        }
-      }
-    }
+  	"validation": {
+  		"field": {
+  			"is": {
+  				"empty": "Это поле является обязательным для заполнения",
+  				"incorrect": {
+  					"password": "Неверный пароль"
+  				},
+  				"invalid": {
+  					"common": "Пожалуйста, введите корректное значение",
+  					"email": "Пожалуйста, введите корректный адрес электронной почты"
+  				}
+  			},
+  			"length": {
+  				"lessThan": "Это поле должно состоять минимум из {{minLength}} символов",
+  				"moreThan": "Это поле должно состоять максимум из {{maxLength}} символов"
+  			}
+  		},
+  		"fields": {
+  			"are": {
+  				"not": {
+  					"equal": {
+  						"password": "Пароли не совпадают"
+  					}
+  				}
+  			}
+  		}
+  	}
   }
   ```
 
@@ -182,10 +182,10 @@ On one of my projects at work, we used [i18next](https://www.i18next.com/) libra
   import { App } from "./app";
 
   ReactDOM.render(
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>,
-    document.getElementById("root"),
+  	<React.StrictMode>
+  		<App />
+  	</React.StrictMode>,
+  	document.getElementById("root"),
   );
   ```
 
@@ -201,15 +201,15 @@ On one of my projects at work, we used [i18next](https://www.i18next.com/) libra
   import { withTranslation } from "react-i18next";
 
   const App = ({ t }) => {
-    /*
-      "This field should contain at least 10 characters" for English.
-      "Это поле должно состоять минимум из 10 символов" for Russian.
-    */
-    const translatedText = t("errors:validation.field.length.lessThan", {
-      minLength: 10,
-    });
+  	/*
+  		"This field should contain at least 10 characters" for English.
+  		"Это поле должно состоять минимум из 10 символов" for Russian.
+  	*/
+  	const translatedText = t("errors:validation.field.length.lessThan", {
+  		minLength: 10,
+  	});
 
-    return <h1>{translatedText}</h1>;
+  	return <h1>{translatedText}</h1>;
   };
 
   const AppWithTranslation = withTranslation()(App);
@@ -229,17 +229,17 @@ On one of my projects at work, we used [i18next](https://www.i18next.com/) libra
   import { useTranslation } from "react-i18next";
 
   const App = () => {
-    const { t } = useTranslation();
+  	const { t } = useTranslation();
 
-    /*
-      "This field should contain at least 10 characters" for English.
-      "Это поле должно состоять минимум из 10 символов" for Russian.
-    */
-    const translatedText = t("errors:validation.field.length.lessThan", {
-      minLength: 10,
-    });
+  	/*
+  		"This field should contain at least 10 characters" for English.
+  		"Это поле должно состоять минимум из 10 символов" for Russian.
+  	*/
+  	const translatedText = t("errors:validation.field.length.lessThan", {
+  		minLength: 10,
+  	});
 
-    return <h1>{translatedText}</h1>;
+  	return <h1>{translatedText}</h1>;
   };
 
   export { App };
@@ -271,9 +271,9 @@ I like the API of the `t` function (path to a localization string and a bunch of
 
   ```typescript
   const SUPPORTED_LANGUAGES_MAP = {
-    en: "en",
-    ru: "ru",
-    // ... other languages
+  	en: "en",
+  	ru: "ru",
+  	// ... other languages
   } as const;
 
   const DEFAULT_SELECTED_LANGUAGE = SUPPORTED_LANGUAGES_MAP.en;
@@ -292,8 +292,8 @@ I like the API of the `t` function (path to a localization string and a bunch of
   // ... other namespaces
 
   const dictionary = {
-    errors,
-    // ... other namespaces
+  	errors,
+  	// ... other namespaces
   } as const;
 
   export { dictionary };
@@ -305,33 +305,33 @@ I like the API of the `t` function (path to a localization string and a bunch of
 
   ```typescript
   const errors = {
-    validation: {
-      field: {
-        is: {
-          empty: "errors.validation.field.is.empty",
-          incorrect: {
-            password: "errors.validation.field.is.incorrect.password",
-          },
-          invalid: {
-            common: "errors.validation.field.is.invalid.common",
-            email: "errors.validation.field.is.invalid.email",
-          },
-        },
-        length: {
-          lessThan: "errors.validation.field.length.lessThan",
-          moreThan: "errors.validation.field.length.moreThan",
-        },
-      },
-      fields: {
-        are: {
-          not: {
-            equal: {
-              password: "errors.validation.fields.are.not.equal.password",
-            },
-          },
-        },
-      },
-    },
+  	validation: {
+  		field: {
+  			is: {
+  				empty: "errors.validation.field.is.empty",
+  				incorrect: {
+  					password: "errors.validation.field.is.incorrect.password",
+  				},
+  				invalid: {
+  					common: "errors.validation.field.is.invalid.common",
+  					email: "errors.validation.field.is.invalid.email",
+  				},
+  			},
+  			length: {
+  				lessThan: "errors.validation.field.length.lessThan",
+  				moreThan: "errors.validation.field.length.moreThan",
+  			},
+  		},
+  		fields: {
+  			are: {
+  				not: {
+  					equal: {
+  						password: "errors.validation.fields.are.not.equal.password",
+  					},
+  				},
+  			},
+  		},
+  	},
   } as const;
 
   export { errors };
@@ -347,98 +347,98 @@ I like the API of the `t` function (path to a localization string and a bunch of
 
   ```javascript
   const fillTreePaths = (treeWithEmptyPaths, namespace = "") => {
-    const traverse = (currentTree, parentPath) =>
-      Object.entries(currentTree).reduce((updatedCurrentTree, [key, value]) => {
-        const currentPath = `${parentPath}.${key}`;
+  	const traverse = (currentTree, parentPath) =>
+  		Object.entries(currentTree).reduce((updatedCurrentTree, [key, value]) => {
+  			const currentPath = `${parentPath}.${key}`;
 
-        if (typeof value === "string") {
-          return {
-            ...updatedCurrentTree,
-            [key]: currentPath,
-          };
-        }
+  			if (typeof value === "string") {
+  				return {
+  					...updatedCurrentTree,
+  					[key]: currentPath,
+  				};
+  			}
 
-        return {
-          ...updatedCurrentTree,
-          [key]: traverse(value, currentPath),
-        };
-      }, {});
+  			return {
+  				...updatedCurrentTree,
+  				[key]: traverse(value, currentPath),
+  			};
+  		}, {});
 
-    const newTree = traverse(treeWithEmptyPaths, namespace);
+  	const newTree = traverse(treeWithEmptyPaths, namespace);
 
-    const stringifiedTree = JSON.stringify(newTree, null, 2);
-    const refinedTree = stringifiedTree
-      // Removes double quote before keys.
-      .replace(/(\s{2,})"/g, "$1")
-      // Removes double quote right after keys and before colons.
-      .replace(/"(: )/g, "$1");
+  	const stringifiedTree = JSON.stringify(newTree, null, 2);
+  	const refinedTree = stringifiedTree
+  		// Removes double quote before keys.
+  		.replace(/(\s{2,})"/g, "$1")
+  		// Removes double quote right after keys and before colons.
+  		.replace(/"(: )/g, "$1");
 
-    return refinedTree;
+  	return refinedTree;
   };
 
   /*
   Returns
   {
-    validation: {
-      field: {
-        is: {
-          empty: "errors.validation.field.is.empty",
-          incorrect: {
-            password: "errors.validation.field.is.incorrect.password",
-          },
-          invalid: {
-            common: "errors.validation.field.is.invalid.common",
-            email: "errors.validation.field.is.invalid.email",
-          },
-        },
-        length: {
-          lessThan: "errors.validation.field.length.lessThan",
-          moreThan: "errors.validation.field.length.moreThan",
-        },
-      },
-      fields: {
-        are: {
-          not: {
-            equal: {
-              password: "errors.validation.fields.are.not.equal.password",
-            },
-          },
-        },
-      },
-    },
+  	validation: {
+  		field: {
+  			is: {
+  				empty: "errors.validation.field.is.empty",
+  				incorrect: {
+  					password: "errors.validation.field.is.incorrect.password",
+  				},
+  				invalid: {
+  					common: "errors.validation.field.is.invalid.common",
+  					email: "errors.validation.field.is.invalid.email",
+  				},
+  			},
+  			length: {
+  				lessThan: "errors.validation.field.length.lessThan",
+  				moreThan: "errors.validation.field.length.moreThan",
+  			},
+  		},
+  		fields: {
+  			are: {
+  				not: {
+  					equal: {
+  						password: "errors.validation.fields.are.not.equal.password",
+  					},
+  				},
+  			},
+  		},
+  	},
   }
   */
   fillTreePaths(
-    {
-      validation: {
-        field: {
-          is: {
-            empty: "",
-            incorrect: {
-              password: "",
-            },
-            invalid: {
-              common: "",
-              email: "",
-            },
-          },
-          length: {
-            lessThan: "",
-            moreThan: "",
-          },
-        },
-        fields: {
-          are: {
-            not: {
-              equal: {
-                password: "",
-              },
-            },
-          },
-        },
-      },
-    },
-    "errors",
+  	{
+  		validation: {
+  			field: {
+  				is: {
+  					empty: "",
+  					incorrect: {
+  						password: "",
+  					},
+  					invalid: {
+  						common: "",
+  						email: "",
+  					},
+  				},
+  				length: {
+  					lessThan: "",
+  					moreThan: "",
+  				},
+  			},
+  			fields: {
+  				are: {
+  					not: {
+  						equal: {
+  							password: "",
+  						},
+  					},
+  				},
+  			},
+  		},
+  	},
+  	"errors",
   );
   ```
 
@@ -457,21 +457,21 @@ I like the API of the `t` function (path to a localization string and a bunch of
   type Values<Type> = Type[Keys<Type>];
 
   /*
-    Turns particular string values into abstract 'string' type.
-    It allows to type translations with I18nPaths subtypes, because otherwise
-    TypeScript will be complaining that values of translations are not the same
-    as paths ones.
+  	Turns particular string values into abstract 'string' type.
+  	It allows to type translations with I18nPaths subtypes, because otherwise
+  	TypeScript will be complaining that values of translations are not the same
+  	as paths ones.
   */
   type GetDictionary<Type> = Type extends string
-    ? string
-    : { [Path in Keys<Type>]: GetDictionary<Type[Path]> };
+  	? string
+  	: { [Path in Keys<Type>]: GetDictionary<Type[Path]> };
 
   type Dictionary = GetDictionary<typeof dictionary>;
 
   type SupportedLanguage = Values<typeof SUPPORTED_LANGUAGES_MAP>;
 
   type Dictionaries = {
-    [Language in SupportedLanguage]: Dictionary;
+  	[Language in SupportedLanguage]: Dictionary;
   };
 
   export type { Dictionaries, Dictionary, SupportedLanguage };
@@ -491,9 +491,9 @@ I like the API of the `t` function (path to a localization string and a bunch of
   // ... other dictionaries
 
   const dictionaries: Dictionaries = {
-    en,
-    ru,
-    // ... other dictionaries
+  	en,
+  	ru,
+  	// ... other dictionaries
   };
 
   export { dictionaries };
@@ -510,8 +510,8 @@ I like the API of the `t` function (path to a localization string and a bunch of
   // ... other namespaces
 
   const englishDictionary: Dictionary = {
-    errors,
-    // ... other namespaces
+  	errors,
+  	// ... other namespaces
   };
 
   export { englishDictionary };
@@ -525,34 +525,34 @@ I like the API of the `t` function (path to a localization string and a bunch of
   import { Dictionary } from "i18n/types";
 
   const errors: Dictionary["errors"] = {
-    validation: {
-      field: {
-        is: {
-          empty: "This field is required",
-          incorrect: {
-            password: "Password is incorrect",
-          },
-          invalid: {
-            common: "Please enter a valid value",
-            email: "Please enter a valid email address",
-          },
-        },
-        length: {
-          lessThan: "This field should contain at least {minLength} characters",
-          moreThan: `This field should contain no more than {maxLength}
-          characters`,
-        },
-      },
-      fields: {
-        are: {
-          not: {
-            equal: {
-              password: "Passwords don't match",
-            },
-          },
-        },
-      },
-    },
+  	validation: {
+  		field: {
+  			is: {
+  				empty: "This field is required",
+  				incorrect: {
+  					password: "Password is incorrect",
+  				},
+  				invalid: {
+  					common: "Please enter a valid value",
+  					email: "Please enter a valid email address",
+  				},
+  			},
+  			length: {
+  				lessThan: "This field should contain at least {minLength} characters",
+  				moreThan: `This field should contain no more than {maxLength}
+  				characters`,
+  			},
+  		},
+  		fields: {
+  			are: {
+  				not: {
+  					equal: {
+  						password: "Passwords don't match",
+  					},
+  				},
+  			},
+  		},
+  	},
   };
 
   export { errors };
@@ -569,8 +569,8 @@ I like the API of the `t` function (path to a localization string and a bunch of
   // ... other namespaces
 
   const russianDictionary: Dictionary = {
-    errors,
-    // ... other namespaces
+  	errors,
+  	// ... other namespaces
   };
 
   export { russianDictionary };
@@ -584,33 +584,33 @@ I like the API of the `t` function (path to a localization string and a bunch of
   import { Dictionary } from "i18n/types";
 
   const errors: Dictionary["errors"] = {
-    validation: {
-      field: {
-        is: {
-          empty: "Это поле является обязательным для заполнения",
-          incorrect: {
-            password: "Неверный пароль",
-          },
-          invalid: {
-            common: "Пожалуйста, введите корректное значение",
-            email: "Пожалуйста, введите корректный адрес электронной почты",
-          },
-        },
-        length: {
-          lessThan: "Это поле должно состоять минимум из {minLength} символов",
-          moreThan: "Это поле должно состоять максимум из {maxLength} символов",
-        },
-      },
-      fields: {
-        are: {
-          not: {
-            equal: {
-              password: "Пароли не совпадают",
-            },
-          },
-        },
-      },
-    },
+  	validation: {
+  		field: {
+  			is: {
+  				empty: "Это поле является обязательным для заполнения",
+  				incorrect: {
+  					password: "Неверный пароль",
+  				},
+  				invalid: {
+  					common: "Пожалуйста, введите корректное значение",
+  					email: "Пожалуйста, введите корректный адрес электронной почты",
+  				},
+  			},
+  			length: {
+  				lessThan: "Это поле должно состоять минимум из {minLength} символов",
+  				moreThan: "Это поле должно состоять максимум из {maxLength} символов",
+  			},
+  		},
+  		fields: {
+  			are: {
+  				not: {
+  					equal: {
+  						password: "Пароли не совпадают",
+  					},
+  				},
+  			},
+  		},
+  	},
   };
 
   export { errors };
@@ -632,52 +632,52 @@ I like the API of the `t` function (path to a localization string and a bunch of
   import { dictionaries } from "./dictionaries";
 
   interface I18nContextInterface {
-    selectedLanguage: SupportedLanguage;
-    setLanguage: (newSelectedLanguage: SupportedLanguage) => void;
-    translate: HydrateText;
+  	selectedLanguage: SupportedLanguage;
+  	setLanguage: (newSelectedLanguage: SupportedLanguage) => void;
+  	translate: HydrateText;
   }
 
   const I18nContext = React.createContext<I18nContextInterface>({
-    selectedLanguage: DEFAULT_SELECTED_LANGUAGE,
-    setLanguage: () => {
-      // no-op
-    },
-    translate: () => "",
+  	selectedLanguage: DEFAULT_SELECTED_LANGUAGE,
+  	setLanguage: () => {
+  		// no-op
+  	},
+  	translate: () => "",
   });
 
   const I18nProvider: React.FC = ({ children }) => {
-    const [selectedLanguage, setLanguage] = React.useState<SupportedLanguage>(
-      DEFAULT_SELECTED_LANGUAGE,
-    );
+  	const [selectedLanguage, setLanguage] = React.useState<SupportedLanguage>(
+  		DEFAULT_SELECTED_LANGUAGE,
+  	);
 
-    React.useEffect(() => {
-      const searchParams = new URLSearchParams(window.location.search);
+  	React.useEffect(() => {
+  		const searchParams = new URLSearchParams(window.location.search);
 
-      const language = searchParams.get("lng");
+  		const language = searchParams.get("lng");
 
-      if (isSupportedLanguage(language)) {
-        setLanguage(language);
-      }
-    }, []);
+  		if (isSupportedLanguage(language)) {
+  			setLanguage(language);
+  		}
+  	}, []);
 
-    const translate = React.useMemo(
-      () => textResolver(dictionaries[selectedLanguage]),
-      [selectedLanguage],
-    );
+  	const translate = React.useMemo(
+  		() => textResolver(dictionaries[selectedLanguage]),
+  		[selectedLanguage],
+  	);
 
-    const value = {
-      selectedLanguage,
-      setLanguage,
-      translate,
-    };
+  	const value = {
+  		selectedLanguage,
+  		setLanguage,
+  		translate,
+  	};
 
-    return (
-      <I18nContext.Provider value={value}>{children}</I18nContext.Provider>
-    );
+  	return (
+  		<I18nContext.Provider value={value}>{children}</I18nContext.Provider>
+  	);
   };
 
   const useI18n = (): I18nContextInterface => {
-    return React.useContext(I18nContext);
+  	return React.useContext(I18nContext);
   };
 
   export { I18nContext, I18nProvider, useI18n };
@@ -695,21 +695,21 @@ I like the API of the `t` function (path to a localization string and a bunch of
   import { Dictionary, SupportedLanguage } from "./types";
 
   const textResolver =
-    (dictionary: Dictionary): HydrateText =>
-    (pathOrText, variables, interpolationOptions) => {
-      return hydrateText(
-        get(dictionary, pathOrText, pathOrText),
-        variables,
-        interpolationOptions,
-      );
-    };
+  	(dictionary: Dictionary): HydrateText =>
+  	(pathOrText, variables, interpolationOptions) => {
+  		return hydrateText(
+  			get(dictionary, pathOrText, pathOrText),
+  			variables,
+  			interpolationOptions,
+  		);
+  	};
 
   const isSupportedLanguage = (
-    language: string | null,
+  	language: string | null,
   ): language is SupportedLanguage => {
-    return Object.values(SUPPORTED_LANGUAGES_MAP).includes(
-      language as SupportedLanguage,
-    );
+  	return Object.values(SUPPORTED_LANGUAGES_MAP).includes(
+  		language as SupportedLanguage,
+  	);
   };
 
   export { textResolver, isSupportedLanguage };
@@ -730,12 +730,12 @@ I like the API of the `t` function (path to a localization string and a bunch of
   import { App } from "./app";
 
   ReactDOM.render(
-    <React.StrictMode>
-      <I18nProvider>
-        <App />
-      </I18nProvider>
-    </React.StrictMode>,
-    document.getElementById("root"),
+  	<React.StrictMode>
+  		<I18nProvider>
+  			<App />
+  		</I18nProvider>
+  	</React.StrictMode>,
+  	document.getElementById("root"),
   );
   ```
 
@@ -753,17 +753,17 @@ I like the API of the `t` function (path to a localization string and a bunch of
   const { field } = dictionary.errors.validation;
 
   const App: React.VFC = () => {
-    const { translate } = useI18n();
+  	const { translate } = useI18n();
 
-    /*
-      "This field should contain at least 10 characters" for English.
-      "Это поле должно состоять минимум из 10 символов" for Russian.
-    */
-    const translatedText = translate(field.length.lessThan, {
-      minLength: 10,
-    });
+  	/*
+  		"This field should contain at least 10 characters" for English.
+  		"Это поле должно состоять минимум из 10 символов" for Russian.
+  	*/
+  	const translatedText = translate(field.length.lessThan, {
+  		minLength: 10,
+  	});
 
-    return <h1>{translatedText}</h1>;
+  	return <h1>{translatedText}</h1>;
   };
 
   export { App };
@@ -789,34 +789,34 @@ Even if localization is not necessary, I believe it is still a good idea to keep
 
   ```typescript
   const ERRORS_TEXT = {
-    validation: {
-      field: {
-        is: {
-          empty: "This field is required",
-          incorrect: {
-            password: "Password is incorrect",
-          },
-          invalid: {
-            common: "Please enter a valid value",
-            email: "Please enter a valid email address",
-          },
-        },
-        length: {
-          lessThan: "This field should contain at least {minLength} characters",
-          moreThan: `This field should contain no more than {maxLength}
-          characters`,
-        },
-      },
-      fields: {
-        are: {
-          not: {
-            equal: {
-              password: "Passwords don't match",
-            },
-          },
-        },
-      },
-    },
+  	validation: {
+  		field: {
+  			is: {
+  				empty: "This field is required",
+  				incorrect: {
+  					password: "Password is incorrect",
+  				},
+  				invalid: {
+  					common: "Please enter a valid value",
+  					email: "Please enter a valid email address",
+  				},
+  			},
+  			length: {
+  				lessThan: "This field should contain at least {minLength} characters",
+  				moreThan: `This field should contain no more than {maxLength}
+  				characters`,
+  			},
+  		},
+  		fields: {
+  			are: {
+  				not: {
+  					equal: {
+  						password: "Passwords don't match",
+  					},
+  				},
+  			},
+  		},
+  	},
   };
   ```
 
@@ -835,14 +835,14 @@ Even if localization is not necessary, I believe it is still a good idea to keep
   const { field } = ERRORS_TEXT.validation;
 
   const App: React.VFC = () => {
-    /*
-      "This field should contain at least 10 characters".
-    */
-    const text = hydrateText(field.length.lessThan, {
-      minLength: 10,
-    });
+  	/*
+  		"This field should contain at least 10 characters".
+  	*/
+  	const text = hydrateText(field.length.lessThan, {
+  		minLength: 10,
+  	});
 
-    return <h1>{text}</h1>;
+  	return <h1>{text}</h1>;
   };
 
   export { App };
@@ -873,12 +873,12 @@ To achieve this, an ability to replace default variable markers was added. In th
 ```typescript
 // "/posts/10"
 hydrateText(
-  "/posts/:id",
-  { id: 10 },
-  {
-    prefix: ":",
-    suffix: "",
-  },
+	"/posts/:id",
+	{ id: 10 },
+	{
+		prefix: ":",
+		suffix: "",
+	},
 );
 ```
 
@@ -890,8 +890,8 @@ If it is necessary to do this in several places, it is better to use another fun
 
 ```typescript
 const hydrateRoute = configureHydrateText({
-  prefix: ":",
-  suffix: "",
+	prefix: ":",
+	suffix: "",
 });
 
 // "/posts/10"

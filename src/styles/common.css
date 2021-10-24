@@ -1,78 +1,78 @@
 :root {
-  --color-dark: #202124;
-  --color-light: white;
-  --border-radius: 2px;
-  --text-color: var(--color-dark);
-  --background-color: var(--color-light);
+	--color-dark: #202124;
+	--color-light: white;
+	--border-radius: 2px;
+	--text-color: var(--color-dark);
+	--background-color: var(--color-light);
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --text-color: var(--color-light);
-    --background-color: var(--color-dark);
-  }
+	:root {
+		--text-color: var(--color-light);
+		--background-color: var(--color-dark);
+	}
 }
 
 body {
-  background-color: var(--background-color);
-  color: var(--text-color);
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-  font-size: 100%;
-  line-height: 150%;
-  margin: 0 auto;
-  max-width: 40em;
-  padding: 0 1em;
+	background-color: var(--background-color);
+	color: var(--text-color);
+	font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+		Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+	font-size: 100%;
+	line-height: 150%;
+	margin: 0 auto;
+	max-width: 40em;
+	padding: 0 1em;
 }
 
 h1 {
-  line-height: 125%;
+	line-height: 125%;
 }
 
 h2 {
-  line-height: 150%;
+	line-height: 150%;
 }
 
 a {
-  color: var(--text-color);
+	color: var(--text-color);
 }
 
 a:hover,
 a:focus {
-  background-color: var(--text-color);
-  color: var(--background-color);
-  text-decoration: none;
+	background-color: var(--text-color);
+	color: var(--background-color);
+	text-decoration: none;
 }
 
 a:focus {
-  border-radius: 2px;
-  outline: 2px dashed var(--text-color);
-  outline-offset: 2px;
+	border-radius: 2px;
+	outline: 2px dashed var(--text-color);
+	outline-offset: 2px;
 }
 
 ul {
-  padding-inline-start: 20px;
+	padding-inline-start: 20px;
 }
 
 .header,
 .social-links {
-  align-items: center;
-  display: flex;
-  flex-wrap: wrap;
+	align-items: center;
+	display: flex;
+	flex-wrap: wrap;
 }
 
 .header {
-  justify-content: space-between;
+	justify-content: space-between;
 }
 
 .social-links {
-  column-gap: 24px;
-  list-style: none;
-  padding: 0;
-  row-gap: 0.25em;
+	column-gap: 24px;
+	list-style: none;
+	padding: 0;
+	row-gap: 0.25em;
 }
 
 ::selection {
-  background-color: var(--text-color);
-  color: var(--background-color);
+	background-color: var(--text-color);
+	color: var(--background-color);
 }
