@@ -15,6 +15,7 @@ code[class*="language"] {
 
 	tab-size: var(--tab-size);
 	transition: tab-size 0.2s;
+	white-space: pre-wrap;
 }
 
 @media (min-width: 640px) {
