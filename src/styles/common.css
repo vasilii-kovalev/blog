@@ -45,7 +45,6 @@ a:focus {
 }
 
 a:focus {
-	border-radius: 2px;
 	outline: 2px dashed var(--text-color);
 	outline-offset: 2px;
 }
