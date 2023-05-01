@@ -13,7 +13,7 @@ tags:
 - Started playing in the middle of March 2023 with patch 1.61
 - Ended playing at the end of April 2023 with patch 1.62_PT_Hotfix
 - No mods installed
-- Time spent in the game - 199.5 hours
+- Time spent in the game - 199.6 hours
 - Language - English (both voice and subtitles)
 - The first half I played on a notebook, which barely worked even with low graphical settings, and the second half - on a machine with top (or almost top) hardware you could find in 2023 with ultra graphical settings
 
@@ -36,6 +36,7 @@ What I disliked:
 
 - Bugs. I faced different kinds of them (on both machines, with different image quality settings, with the latest patch), such as:
   - Flickering/broken/pixilated/blurry textures
+  - Panam and other characters' hair color change inside and outside vehicles
   - Weapon mods being displayed in the mod slots (the dots near the weapon image) after removing them
   - Performing "Sheath weapon" (pressing the "Alt" key two times by default) selects the next weapon (happens about 3-4 times out of 10)
   - Broken animations. For example, when using "Short circuit" quickhack on people, they stand several seconds (even if they are already incapacitated), then are rendered lying on the ground
@@ -68,10 +69,10 @@ Things I upset about in their current state, which could be done better:
 - Though the world is big, and there are NPCs on the streets, they can't be interacted with (they have only generic phrases). If you smash into a car, you'll get only sluggish comments from the drivers. In GTA San Andreas, they would chase you for some time and try to crash your vehicle as a revenge
 - Inability to remove some saves. Point-of-no-return, the last manual and auto-saves can't be removed using the in-game save/load menus. Every single game I played before allowed it, so I don't understand the reason behind this "feature"
 - Development priorities. In the patch 1.62 a new ray tracing mode was introduced, while there are crucial bugs to be fixed, which means the fixing will take even longer than it could. Maybe another 3 years or more...
-- Russian localization is mediocre. Checked videos with the latest patch installed. So emotionless. Don't believe it. Such a shame, because I played The Witcher 3 with Russian localization because it was interesting, live and natural
+- Russian localization is mediocre. Checked videos with the latest patch installed. Usually under-reacting. Unnatural. Don't believe it. Such a shame, because I played The Witcher 3 with Russian localization because it was interesting, live and natural
 
 ## Final thoughts
 
 In general, I would say I liked the game, but in the first run I have seen about 95% of the content, received 93% of the achievements (could be more if not the bug I mentioned earlier) and don't really want to return - nothing for. Maybe in the far future, but I'm not sure.
 
-And one last thing: as mentioned at the very beginning of this review, I pre-ordered the game. After its release, I decided not to make this mistake ever again.
+And one last thing: as mentioned at the very beginning of this review, I pre-ordered the game. The first time in my life. Release of the game showed this was a mistake. I'm not going to make it ever again.
