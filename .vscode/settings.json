@@ -8,8 +8,12 @@
 		"source.fixAll.stylelint": "explicit"
 	},
 	"markdownlint.config": {
+		"MD024": {
+			"siblings_only": true
+		},
 		"no-hard-tabs": {
-			"code_blocks": false
+			"code_blocks": false,
+			"spaces_per_tab": 2
 		}
 	}
 }
