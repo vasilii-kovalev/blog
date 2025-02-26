@@ -9,12 +9,12 @@ tags:
 
 ## Summary
 
-This article describes my code style rules, which include both programming language -specific approaches to write code as well as code formatting preferences.
+This article describes my code style rules, which include both programming language-specific approaches to write code as well as code formatting preferences.
 
 ## Goals
 
 1. Keep the code consistent to make it easier to read and change
-2. Keep them simple to follow by humans and easy to configure in tools
+2. Keep the rules simple to follow by humans and easy to configure in tools
 3. Eliminate ambiguity and dependence on specific circumstances (where possible)
 4. Simplify changes review in version control systems
 
@@ -26,7 +26,8 @@ This article describes my code style rules, which include both programming langu
 
 TBD.
 Always multiline.
-Always JSDoc for JS/TS.
+Above the commented code.
+JSDoc where supported.
 Start with capital letter.
 Capital letter after TODO.
 
@@ -44,16 +45,16 @@ Each item in brackets—parentheses/round brackets (`()`), square brackets (`[]`
 {% codeblock "TypeScript" %}
 
 ```typescript
-/*
-	Example 1.
-*/
+/**
+ * Example 1.
+ */
 const getRandomNumber = (): number => {
 	return Math.random();
 };
 
-/*
-	Example 2.
-*/
+/**
+ * Example 2.
+ */
 const getRandomNumber = (
 	min: number,
 	max: number,
@@ -70,9 +71,9 @@ const getRandomNumber = (
 		);
 	}
 
-	/*
-		Example of multiple conditions.
-	*/
+	/**
+	 * Example of multiple conditions.
+	 */
 	if (
 		min < 0
 		&& max < 0
@@ -100,9 +101,9 @@ interface GetRandomNumberParams {
 	min: number;
 }
 
-/*
-	Example 3.
-*/
+/**
+ * Example 3.
+ */
 const getRandomNumber = (
 	params: GetRandomNumberParams,
 ): number => {
@@ -123,9 +124,9 @@ const getRandomNumber = (
 	);
 };
 
-/*
-	Example 4.
-*/
+/**
+ * Example 4.
+ */
 const getRandomNumber = (
 	params: GetRandomNumberParams,
 ): number => {
@@ -155,9 +156,9 @@ const getRandomNumber = (
 	);
 };
 
-/*
-	Example 5.
-*/
+/**
+ * Example 5.
+ */
 const getRandomNumber = (
 	{
 		max,
@@ -185,9 +186,9 @@ const getRandomNumber = (
 	);
 };
 
-/*
-	Example 6.
-*/
+/**
+ * Example 6.
+ */
 const getRandomNumber = (
 	params: Partial<
 		GetRandomNumberParams
@@ -219,9 +220,9 @@ const getRandomNumber = (
 	);
 };
 
-/*
-	Example 7.
-*/
+/**
+ * Example 7.
+ */
 const getRandomNumber = (
 	{
 		max = 1,
@@ -251,9 +252,9 @@ const getRandomNumber = (
 	);
 };
 
-/*
-	Example 8.
-*/
+/**
+ * Example 8.
+ */
 const getRandomInt = (
 	{
 		max = 1,
@@ -283,47 +284,47 @@ const getRandomInt = (
 	);
 };
 
-/*
-	Example 9.
-*/
+/**
+ * Example 9.
+ */
 const randomNumber = getRandomNumber(
 	0.5,
 	1.5,
 );
 
-/*
-	Example 10.
-*/
+/**
+ * Example 10.
+ */
 const randomInt = getRandomInt();
 
-/*
-	Example 11.
-*/
+/**
+ * Example 11.
+ */
 const randomInt = getRandomInt(
 	{},
 );
 
-/*
-	Example 12.
-*/
+/**
+ * Example 12.
+ */
 const randomInt = getRandomInt(
 	{
 		min: 0.5,
 	},
 );
 
-/*
-	Example 13.
-*/
+/**
+ * Example 13.
+ */
 const randomInt = getRandomInt(
 	{
 		max: 1.5,
 	},
 );
 
-/*
-	Example 14.
-*/
+/**
+ * Example 14.
+ */
 const randomInt = getRandomInt(
 	{
 		min: 0.5,
@@ -331,9 +332,9 @@ const randomInt = getRandomInt(
 	},
 );
 
-/*
-	Example 15.
-*/
+/**
+ * Example 15.
+ */
 const shortVariable: Partial<
 	GetRandomNumberParams
 > = {
@@ -345,9 +346,9 @@ const randomInt = getRandomInt(
 	shortVariable,
 );
 
-/*
-	Example 16.
-*/
+/**
+ * Example 16.
+ */
 const veryLooooooooooooooooooooooooooooooooooooooooooooooooongVariable: Partial<
 	GetRandomNumberParams
 > = {
@@ -355,7 +356,9 @@ const veryLooooooooooooooooooooooooooooooooooooooooooooooooongVariable: Partial<
 	max: 1.5,
 };
 
-// "Specific circumstances" (long variable and function names) don't affect formatting.
+/**
+ * "Specific circumstances" (long variable and function names) don't affect formatting.
+ */
 const randomInt = getRandoooooooooooooooooooooooooooooooooooooooooooooooooomInt(
 	veryLooooooooooooooooooooooooooooooooooooooooooooooooongVariable,
 );
@@ -381,9 +384,9 @@ type UseStateReturnType<
 	SetValue<Value>,
 ];
 
-/*
-	Example 17.
-*/
+/**
+ * Example 17.
+ */
 const useState = <
 	Value = unknown,
 >(
@@ -411,9 +414,9 @@ const useState = <
 	];
 };
 
-/*
-	Example 18.
-*/
+/**
+ * Example 18.
+ */
 const stateGetterAndSetter = useState(
 	0,
 );
@@ -422,9 +425,9 @@ interface State {
 	count: number;
 }
 
-/*
-	Example 19.
-*/
+/**
+ * Example 19.
+ */
 const stateGetterAndSetter = useState<
 	State,
 >(
@@ -433,9 +436,9 @@ const stateGetterAndSetter = useState<
 	},
 );
 
-/*
-	Example 20.
-*/
+/**
+ * Example 20.
+ */
 const [
 	state,
 	setState,
@@ -447,9 +450,9 @@ const [
 	},
 );
 
-/*
-	Example 21.
-*/
+/**
+ * Example 21.
+ */
 const [
 	state,
 ] = useState<
@@ -460,9 +463,9 @@ const [
 	},
 );
 
-/*
-	Example 22.
-*/
+/**
+ * Example 22.
+ */
 const [
 	,
 	setState,
@@ -474,9 +477,9 @@ const [
 	},
 );
 
-/*
-	Example 23.
-*/
+/**
+ * Example 23.
+ */
 setState(
 	(
 		{
@@ -489,24 +492,24 @@ setState(
 	},
 );
 
-/*
-	Example 24.
-*/
+/**
+ * Example 24.
+ */
 import {
 	type FC,
 } from "react";
 
-/*
-	Example 25.
-*/
+/**
+ * Example 25.
+ */
 import {
 	type FC,
 	useState,
 } from "react";
 
-/*
-	Example 26.
-*/
+/**
+ * Example 26.
+ */
 export {
 	type FC,
 	getRandomInt,
@@ -567,18 +570,100 @@ a:is(
 
 #### Items sorting
 
-TBD.
-Alphabetical when order doesn't change behavior.
+Items are sorted alphabetically (case-insensitive) when order doesn't change behavior.
+
+##### Examples
+
+{% codeblock "TypeScript" %}
+
+```typescript
+/**
+ * Example 1.
+ */
+interface User {
+	email: string;
+	fullName: string;
+	id: string;
+	isAdmin: boolean;
+	permissions: Array<string>;
+}
+
+const user: User = {
+	email: "John_Doe@site.com",
+	fullName: "John Doe",
+	id: "123",
+	isAdmin: true,
+	permissions: [
+		"CAN_CREATE_USERS",
+		"CAN_DELETE_USERS",
+		"CAN_EDIT_USERS",
+		"CAN_READ_USERS",
+	],
+};
+
+/**
+ * Example 2.
+ */
+const getAdminUser = (
+	override: Partial<User> = {},
+): User => {
+	const {
+		permissions = [],
+	} = override;
+
+	return {
+		email: "John_Doe@site.com",
+		fullName: "John Doe",
+		id: "123",
+		...override,
+		/**
+		 * `isAdmin` and `permissions` should take precedence over `override` destructuring, so they are placed after it,
+		 * creating a new sorting block.
+		 */
+		isAdmin: true,
+		permissions: [
+			...permissions,
+			"CAN_CREATE_USERS",
+			"CAN_DELETE_USERS",
+			"CAN_EDIT_USERS",
+			"CAN_READ_USERS",
+		],
+	};
+};
+
+/**
+ * Example 3.
+ */
+import {
+	lazy,
+	/**
+	 * `type` keyword doesn't affect the sorting.
+	 */
+	type SetStateAction,
+	Suspense,
+} from "react";
+
+/**
+ * Example 4.
+ */
+export {
+	type FC,
+	lazy,
+	Suspense,
+};
+```
+
+{% endcodeblock %}
 
 #### Naming
 
 TBD.
 [Naming cheatsheet](https://github.com/kettanaito/naming-cheatsheet) with do/does.
 
-#### Parameters count
+#### Project structure
 
 TBD.
-1 -> as is. 2 -> object.
+Folder names. Files in thematic folders (like `components`) are located plainly, without sub-folders. Where to put tests - plainly or in `tests` directory (latter, probably).
 
 #### Trailing comma
 
@@ -591,6 +676,11 @@ TBD.
 Double with character escaping, unless there are better alternatives (template literals, for example).
 
 ### Javascript/Typescript
+
+#### Array type
+
+TBD.
+Use `Array<Item>` instead of `Item[]`.
 
 #### Conditions
 
@@ -617,6 +707,66 @@ Handler the error in actions (high level trigger handlers) instead of close to t
 TBD.
 Always.
 
+#### Function signature
+
+TBD.
+Input and output are explicitly typed rather than inferred. Standalone types for parameters and return type. Use generics where available (`.map<Item>()`, for example).
+Describe how to type sub-functions in a function:
+
+```typescript
+/**
+ * Option 1.
+ */
+interface Function1Params {
+	isAdmin: boolean;
+}
+
+interface FunctionsReturnType {
+	function1: (
+		params: Function1Params,
+	) => void;
+}
+
+const useFunctions = (): FunctionsReturnType => {
+	const function1: FunctionsReturnType["function1"] = (
+		params,
+	) => {
+		return undefined;
+	};
+
+	return {
+		function1,
+	};
+};
+
+/**
+ * Option 2.
+ */
+interface Function1Params {
+	isAdmin: boolean;
+}
+
+type Function1 = (
+	params: Function1Params,
+) => void;
+
+interface FunctionsReturnType {
+	function1: Function1;
+}
+
+const useFunctions = (): FunctionsReturnType => {
+	const function1: Function1 = (
+		params,
+	) => {
+		return undefined;
+	};
+
+	return {
+		function1,
+	};
+};
+```
+
 #### Function type
 
 TBD.
@@ -638,6 +788,11 @@ TBD.
 
 TBD.
 In front of the 2nd+ statement.
+
+#### Parameters count
+
+TBD.
+1 -> as is. 2 -> object, but consider using object all the time.
 
 #### Value mapping
 
