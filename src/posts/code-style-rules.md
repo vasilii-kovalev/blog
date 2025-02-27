@@ -655,6 +655,42 @@ export {
 
 {% endcodeblock %}
 
+{% codeblock "HTML" %}
+
+```html
+<!--
+	Example 1.
+-->
+<img
+	alt="Favicon from Example site"
+	class="my-class"
+	height="10"
+	src="https://example.com/favicon.png"
+	width="10"
+>
+```
+
+{% endcodeblock %}
+
+{% codeblock "CSS" %}
+
+```css
+/*
+	Example 1.
+*/
+.my-class {
+	display: flex;
+	flex-direction: column;
+	font-size: 12px;
+	gap: 10px 12px;
+	justify-content: space-between;
+	margin: 10px;
+	margin-block-end: 12px;
+}
+```
+
+{% endcodeblock %}
+
 #### Naming
 
 TBD.
