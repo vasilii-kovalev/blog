@@ -24,12 +24,132 @@ This article describes my code style rules, which include both programming langu
 
 #### Comments
 
-TBD.
-Always multiline.
-Above the commented code.
-JSDoc where supported.
-Start with capital letter.
-Capital letter after TODO.
+* Always multiline
+* Above the commented code
+* Start with a capital letter
+* A capital letter is used after TODO (or [@todo](https://jsdoc.app/tags-todo)) and similar prefixes
+
+The rules are applicable unless a feature requires otherwise (see examples below).
+
+##### Examples
+
+{% codeblock "TypeScript" %}
+
+```typescript
+/*
+	Example 1.
+*/
+const PRECISION = 2;
+
+/**
+ * @deprecated Use `formatNumberV2` instead.
+ * @todo Remove after migrating to `formatNumberV2`.
+ */
+const formatNumber = (
+	value: number,
+): string => {
+	const valueStringified = value.toString();
+	const [
+		integer,
+		fraction,
+	] = valueStringified.split(
+		".",
+	);
+
+	if (
+		fraction === undefined
+	) {
+		return integer;
+	}
+
+	const fractionReduced = fraction.slice(
+		0,
+		PRECISION,
+	);
+
+	return `${
+		integer
+	}.${
+		fractionReduced
+	}`;
+};
+
+const formatter = new Intl.NumberFormat(
+	"en-US",
+	{
+		/*
+			Leaves up to 2 fraction digits.
+		*/
+		maximumFractionDigits: 2,
+	},
+);
+
+const formatNumberV2 = (
+	value: number,
+): string => {
+	return formatter.format(
+		value,
+	);
+};
+
+/*
+	Example 2.
+	ESLint disable comments work only when placed on a single line.
+*/
+/* eslint-disable-next-line no-console */
+console.log({
+	result: formatNumberV2(2025.0227),
+});
+
+/*
+	Example 3.
+*/
+/* @ts-ignore Directive comments work only when placed on a single line. */
+formatNumberV2("2025.0227");
+```
+
+{% endcodeblock %}
+
+{% codeblock "CSS" %}
+
+```css
+/*
+	Example 1.
+*/
+.parent {
+	--child-size: 10px;
+}
+
+.child {
+	aspect-ratio: 1 / 1;
+	width: var(
+		/*
+			`.parent` class provides it.
+		*/
+		--child-size
+	);
+}
+```
+
+{% endcodeblock %}
+
+{% codeblock "HTML" %}
+
+```html
+<!--
+	Example 1.
+-->
+<div>
+	<!--
+		Comment here.
+	-->
+	<div>
+		Hello, world.
+	</div>
+</div>
+```
+
+{% endcodeblock %}
 
 #### Indentation
 
@@ -45,16 +165,16 @@ Each item in brackets—parentheses/round brackets (`()`), square brackets (`[]`
 {% codeblock "TypeScript" %}
 
 ```typescript
-/**
- * Example 1.
- */
+/*
+	Example 1.
+*/
 const getRandomNumber = (): number => {
 	return Math.random();
 };
 
-/**
- * Example 2.
- */
+/*
+	Example 2.
+*/
 const getRandomNumber = (
 	min: number,
 	max: number,
@@ -71,9 +191,9 @@ const getRandomNumber = (
 		);
 	}
 
-	/**
-	 * Example of multiple conditions.
-	 */
+	/*
+		Example of multiple conditions.
+	*/
 	if (
 		min < 0
 		&& max < 0
@@ -101,9 +221,9 @@ interface GetRandomNumberParams {
 	min: number;
 }
 
-/**
- * Example 3.
- */
+/*
+	Example 3.
+*/
 const getRandomNumber = (
 	params: GetRandomNumberParams,
 ): number => {
@@ -124,9 +244,9 @@ const getRandomNumber = (
 	);
 };
 
-/**
- * Example 4.
- */
+/*
+	Example 4.
+*/
 const getRandomNumber = (
 	params: GetRandomNumberParams,
 ): number => {
@@ -156,9 +276,9 @@ const getRandomNumber = (
 	);
 };
 
-/**
- * Example 5.
- */
+/*
+	Example 5.
+*/
 const getRandomNumber = (
 	{
 		max,
@@ -186,9 +306,9 @@ const getRandomNumber = (
 	);
 };
 
-/**
- * Example 6.
- */
+/*
+	Example 6.
+*/
 const getRandomNumber = (
 	params: Partial<
 		GetRandomNumberParams
@@ -220,9 +340,9 @@ const getRandomNumber = (
 	);
 };
 
-/**
- * Example 7.
- */
+/*
+	Example 7.
+*/
 const getRandomNumber = (
 	{
 		max = 1,
@@ -252,9 +372,9 @@ const getRandomNumber = (
 	);
 };
 
-/**
- * Example 8.
- */
+/*
+	Example 8.
+*/
 const getRandomInt = (
 	{
 		max = 1,
@@ -284,47 +404,47 @@ const getRandomInt = (
 	);
 };
 
-/**
- * Example 9.
- */
+/*
+	Example 9.
+*/
 const randomNumber = getRandomNumber(
 	0.5,
 	1.5,
 );
 
-/**
- * Example 10.
- */
+/*
+	Example 10.
+*/
 const randomInt = getRandomInt();
 
-/**
- * Example 11.
- */
+/*
+	Example 11.
+*/
 const randomInt = getRandomInt(
 	{},
 );
 
-/**
- * Example 12.
- */
+/*
+	Example 12.
+*/
 const randomInt = getRandomInt(
 	{
 		min: 0.5,
 	},
 );
 
-/**
- * Example 13.
- */
+/*
+	Example 13.
+*/
 const randomInt = getRandomInt(
 	{
 		max: 1.5,
 	},
 );
 
-/**
- * Example 14.
- */
+/*
+	Example 14.
+*/
 const randomInt = getRandomInt(
 	{
 		min: 0.5,
@@ -332,9 +452,9 @@ const randomInt = getRandomInt(
 	},
 );
 
-/**
- * Example 15.
- */
+/*
+	Example 15.
+*/
 const shortVariable: Partial<
 	GetRandomNumberParams
 > = {
@@ -346,9 +466,9 @@ const randomInt = getRandomInt(
 	shortVariable,
 );
 
-/**
- * Example 16.
- */
+/*
+	Example 16.
+*/
 const veryLooooooooooooooooooooooooooooooooooooooooooooooooongVariable: Partial<
 	GetRandomNumberParams
 > = {
@@ -356,9 +476,9 @@ const veryLooooooooooooooooooooooooooooooooooooooooooooooooongVariable: Partial<
 	max: 1.5,
 };
 
-/**
- * "Specific circumstances" (long variable and function names) don't affect formatting.
- */
+/*
+	"Specific circumstances" (long variable and function names) don't affect formatting.
+*/
 const randomInt = getRandoooooooooooooooooooooooooooooooooooooooooooooooooomInt(
 	veryLooooooooooooooooooooooooooooooooooooooooooooooooongVariable,
 );
@@ -384,9 +504,9 @@ type UseStateReturnType<
 	SetValue<Value>,
 ];
 
-/**
- * Example 17.
- */
+/*
+	Example 17.
+*/
 const useState = <
 	Value = unknown,
 >(
@@ -414,9 +534,9 @@ const useState = <
 	];
 };
 
-/**
- * Example 18.
- */
+/*
+	Example 18.
+*/
 const stateGetterAndSetter = useState(
 	0,
 );
@@ -425,9 +545,9 @@ interface State {
 	count: number;
 }
 
-/**
- * Example 19.
- */
+/*
+	Example 19.
+*/
 const stateGetterAndSetter = useState<
 	State,
 >(
@@ -436,9 +556,9 @@ const stateGetterAndSetter = useState<
 	},
 );
 
-/**
- * Example 20.
- */
+/*
+	Example 20.
+*/
 const [
 	state,
 	setState,
@@ -450,9 +570,9 @@ const [
 	},
 );
 
-/**
- * Example 21.
- */
+/*
+	Example 21.
+*/
 const [
 	state,
 ] = useState<
@@ -463,9 +583,9 @@ const [
 	},
 );
 
-/**
- * Example 22.
- */
+/*
+	Example 22.
+*/
 const [
 	,
 	setState,
@@ -477,9 +597,9 @@ const [
 	},
 );
 
-/**
- * Example 23.
- */
+/*
+	Example 23.
+*/
 setState(
 	(
 		{
@@ -492,24 +612,24 @@ setState(
 	},
 );
 
-/**
- * Example 24.
- */
+/*
+	Example 24.
+*/
 import {
 	type FC,
 } from "react";
 
-/**
- * Example 25.
- */
+/*
+	Example 25.
+*/
 import {
 	type FC,
 	useState,
 } from "react";
 
-/**
- * Example 26.
- */
+/*
+	Example 26.
+*/
 export {
 	type FC,
 	getRandomInt,
@@ -577,9 +697,9 @@ Items are sorted alphabetically (case-insensitive) when order doesn't change beh
 {% codeblock "TypeScript" %}
 
 ```typescript
-/**
- * Example 1.
- */
+/*
+	Example 1.
+*/
 interface User {
 	email: string;
 	fullName: string;
@@ -601,9 +721,9 @@ const user: User = {
 	],
 };
 
-/**
- * Example 2.
- */
+/*
+	Example 2.
+*/
 const getAdminUser = (
 	override: Partial<User> = {},
 ): User => {
@@ -616,10 +736,10 @@ const getAdminUser = (
 		fullName: "John Doe",
 		id: "123",
 		...override,
-		/**
-		 * `isAdmin` and `permissions` should take precedence over `override` destructuring, so they are placed after it,
-		 * creating a new sorting block.
-		 */
+		/*
+			`isAdmin` and `permissions` should take precedence over `override` destructuring, so they are placed after it,
+			creating a new sorting block.
+		*/
 		isAdmin: true,
 		permissions: [
 			...permissions,
@@ -631,21 +751,21 @@ const getAdminUser = (
 	};
 };
 
-/**
- * Example 3.
- */
+/*
+	Example 3.
+*/
 import {
 	lazy,
-	/**
-	 * `type` keyword doesn't affect the sorting.
-	 */
+	/*
+		`type` keyword doesn't affect the sorting.
+	*/
 	type SetStateAction,
 	Suspense,
 } from "react";
 
-/**
- * Example 4.
- */
+/*
+	Example 4.
+*/
 export {
 	type FC,
 	lazy,
@@ -750,9 +870,9 @@ Input and output are explicitly typed rather than inferred. Standalone types for
 Describe how to type sub-functions in a function:
 
 ```typescript
-/**
- * Option 1.
- */
+/*
+	Option 1.
+*/
 interface Function1Params {
 	isAdmin: boolean;
 }
@@ -775,9 +895,9 @@ const useFunctions = (): FunctionsReturnType => {
 	};
 };
 
-/**
- * Option 2.
- */
+/*
+	Option 2.
+*/
 interface Function1Params {
 	isAdmin: boolean;
 }
@@ -855,7 +975,7 @@ Interface, sometimes `type` where necessary.
 Also, define array type definition preference.
 Also, define functions in interfaces declaration style (add a reference to the article describing differences of the styles).
 
-### JSX
+### Markup
 
 #### Attributes placement
 
