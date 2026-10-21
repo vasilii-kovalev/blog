@@ -1,0 +1,40 @@
+---
+import { getCollection, render } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+import Page from "../../layouts/page.astro";
+import Header from "../../components/header.astro";
+import { formatPublicationDate } from "../../lib/posts";
+import "../../styles/post.css";
+
+export async function getStaticPaths() {
+	return (await getCollection("posts")).map((post) => {
+		return {
+			params: { id: post.id },
+			props: { post },
+		};
+	});
+}
+
+interface Props {
+	post: CollectionEntry<"posts">;
+}
+const { post } = Astro.props;
+const { Content } = await render(post);
+const source = `https://github.com/vasilii-kovalev/blog/blob/main/${post.filePath}`;
+---
+
+<Page title={post.data.title} description={post.data.description}>
+	<Header />
+	<main>
+		<article>
+			<h1>{post.data.title}</h1>
+			<time datetime={post.data.published} class="published-date">
+				{formatPublicationDate(post.data.published)}
+			</time>
+			<Content />
+		</article>
+	</main>
+	<footer class="footer">
+		<a href={source}>Edit this page on GitHub</a>
+	</footer>
+</Page>

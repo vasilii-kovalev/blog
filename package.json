@@ -3,14 +3,15 @@
 	"version": "1.0.0",
 	"description": "Vasilii Kovalev's blog",
 	"private": true,
+	"type": "module",
 	"keywords": [
 		"blog",
 		"css",
-		"eleventy",
+		"astro",
 		"html",
 		"javascript",
 		"markdown",
-		"nunjucks"
+		"solid"
 	],
 	"author": "Vasilii Kovalev <vasilii.kovalev95@yandex.ru>",
 	"license": "MIT",
@@ -23,27 +24,53 @@
 		"url": "https://github.com/vasilii-kovalev/blog/issues"
 	},
 	"scripts": {
-		"start": "eleventy --serve --quiet",
+		"start": "astro dev",
+		"dev": "astro dev",
+		"preview": "astro preview",
+		"check": "astro check",
+		"test": "node --experimental-strip-types --test tests/*.test.ts",
 		"stylelint:check": "stylelint src/**/*.css --color",
 		"stylelint:fix": "stylelint src/**/*.css --color --fix",
 		"prettier:check": "prettier --check .",
 		"prettier:fix": "prettier --write .",
-		"lint:check": "yarn prettier:check && yarn stylelint:check",
-		"lint:fix": "yarn prettier:fix && yarn stylelint:fix",
-		"build": "eleventy --pathprefix blog",
-		"publish": "yarn build && gh-pages -d dist"
+		"lint:check": "npm run prettier:check && npm run stylelint:check",
+		"lint:fix": "npm run prettier:fix && npm run stylelint:fix",
+		"build": "npm run check && astro build",
+		"publish": "npm run build && gh-pages -d dist --nojekyll"
+	},
+	"dependencies": {
+		"minisearch": "7.2.0",
+		"solid-js": "1.9.17"
 	},
 	"devDependencies": {
-		"@11ty/eleventy": "^0.12.1",
-		"clean-css": "^5.2.2",
-		"gh-pages": "^3.2.3",
-		"html-minifier": "^4.0.0",
-		"markdown-it": "^12.2.0",
-		"markdown-it-anchor": "^8.4.1",
+		"@astrojs/check": "0.9.10",
+		"@astrojs/markdown-remark": "7.3.3",
+		"@astrojs/solid-js": "7.1.0",
+		"@types/hast": "3.0.5",
+		"@types/mdast": "4.0.4",
+		"@types/node": "22.20.5",
+		"astro": "7.4.0",
+		"gh-pages": "6.3.0",
+		"hast-util-from-html": "2.0.3",
+		"hast-util-to-text": "4.0.2",
 		"prettier": "^2.4.1",
 		"stylelint": "^14.0.0",
 		"stylelint-config-prettier": "^9.0.3",
 		"stylelint-config-standard": "^23.0.0",
-		"stylelint-order": "^5.0.0"
+		"stylelint-order": "^5.0.0",
+		"typescript": "6.0.3",
+		"unist-util-visit": "5.1.0"
+	},
+	"devEngines": {
+		"packageManager": {
+			"name": "npm",
+			"version": "^12.0.0",
+			"onFail": "error"
+		},
+		"runtime": {
+			"name": "node",
+			"version": "^22.22.2 || ^24.15.0 || >=26.0.0",
+			"onFail": "error"
+		}
 	}
 }
