@@ -8,9 +8,9 @@
 		"blog",
 		"css",
 		"html",
-		"javascript",
 		"markdown",
-		"solid"
+		"solid",
+		"typescript"
 	],
 	"homepage": "https://github.com/vasilii-kovalev/blog#readme",
 	"bugs": {
