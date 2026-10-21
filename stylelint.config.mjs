@@ -4,12 +4,6 @@ const config = {
 	ignoreFiles: ["src/styles/normalize.css"],
 	plugins: ["stylelint-order"],
 	rules: {
-		"font-family-no-duplicate-names": [
-			true,
-			{
-				ignoreFontFamilyNames: ["monospace"],
-			},
-		],
 		"order/custom-properties-alphabetical-order": true,
 		"order/order": ["custom-properties", "declarations", "at-rules", "rules"],
 		"order/properties-alphabetical-order": true,

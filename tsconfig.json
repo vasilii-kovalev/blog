@@ -1,14 +1,8 @@
 {
 	"extends": "astro/tsconfigs/strict",
-	"include": [".astro/types.d.ts", "**/*"],
-	"exclude": ["dist"],
 	"compilerOptions": {
 		// Interferes with the linter config for inline `type`.
 		"verbatimModuleSyntax": false,
-		"jsx": "preserve",
-		"jsxImportSource": "solid-js",
-		"allowImportingTsExtensions": true,
-		"types": ["node"],
 		// Oxlint checks unused locals and allows names starting with "_"; TypeScript cannot configure that exception.
 		"noUnusedLocals": false,
 		"paths": {

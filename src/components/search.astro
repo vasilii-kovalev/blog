@@ -1,0 +1,57 @@
+---
+import { getCollection } from "astro:content";
+
+import { postUrl } from "@/lib/posts";
+import "@/styles/search.css";
+
+interface Props {
+	indexUrl: string;
+}
+
+const { indexUrl } = Astro.props;
+
+const postsCollection = await getCollection("posts");
+// Newest first. ISO dates sort correctly as strings.
+const posts = postsCollection.toSorted((first, second) => {
+	return second.data.published.localeCompare(first.data.published);
+});
+---
+
+<div class="search">
+	<input
+		id="post-search"
+		type="search"
+		aria-label="Search posts"
+		placeholder="Search posts"
+		aria-controls="search-results"
+		data-index-url={indexUrl}
+	/>
+	<p id="search-loading" role="status" hidden>
+		Loading search…
+	</p>
+	<p id="search-error" role="alert" hidden>
+		Search could not be loaded. You can still use the post list below.
+		<button id="search-retry" type="button">
+			Retry
+		</button>
+	</p>
+	<div id="search-results" aria-busy="false">
+		<p id="search-count" role="status" hidden></p>
+		<ul id="search-list">
+			{posts.map((post) => {
+				return (
+					<li data-id={post.id}>
+						<a href={postUrl(post.id)}>{post.data.title}</a>
+						<p>{post.data.description}</p>
+					</li>
+				);
+			})}
+		</ul>
+	</div>
+</div>
+
+<script>
+	import { initSearch } from "@/lib/search-client";
+
+	initSearch();
+</script>

@@ -3,26 +3,22 @@ import { type APIRoute, type GetStaticPaths } from "astro";
 import { getSearchIndex } from "@/lib/search-index";
 
 const getStaticPaths: GetStaticPaths = async () => {
-	const index = await getSearchIndex();
+	const { documents, version } = await getSearchIndex();
 
 	return [
 		{
 			params: {
-				version: index.version,
+				version,
 			},
 			props: {
-				index,
+				documents,
 			},
 		},
 	];
 };
 
 const GET: APIRoute = ({ props }) => {
-	return new Response(JSON.stringify(props.index), {
-		headers: {
-			"Content-Type": "application/json; charset=utf-8",
-		},
-	});
+	return Response.json(props.documents);
 };
 
 export { GET, getStaticPaths };

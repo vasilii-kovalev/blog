@@ -1,37 +1,24 @@
-import { unified } from "@astrojs/markdown-remark";
-import solid from "@astrojs/solid-js";
+import { satteri } from "@astrojs/markdown-satteri";
 import { defineConfig } from "astro/config";
 
-import rootPackage from "./package.json" with { type: "json" };
-import { codeCaptions, headingLinks } from "./src/lib/markdown.ts";
-
-const getBase = (): string => {
-	if (process.env.NODE_ENV === "production") {
-		return `/${rootPackage.name}`;
-	}
-
-	return "/";
-};
+import { codeCaptions, headingLinks, searchText } from "./src/lib/markdown.ts";
 
 const config = defineConfig({
-	base: getBase(),
+	base: "/blog",
 	compressHTML: true,
-	integrations: [solid()],
 	markdown: {
-		processor: unified({
-			rehypePlugins: [headingLinks],
-			remarkPlugins: [codeCaptions],
-			smartypants: false,
+		processor: satteri({
+			features: {
+				smartPunctuation: false,
+			},
+			// `searchText` goes last, so it reads the final text of the page.
+			hastPlugins: [headingLinks, searchText],
+			mdastPlugins: [codeCaptions],
 		}),
 		syntaxHighlight: false,
 	},
 	site: "https://vasilii-kovalev.github.io",
 	trailingSlash: "always",
-	vite: {
-		resolve: {
-			tsconfigPaths: true,
-		},
-	},
 });
 
 export default config;

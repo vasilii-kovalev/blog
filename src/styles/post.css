@@ -6,10 +6,6 @@ h1 {
 	outline: none;
 }
 
-code {
-	font-size: 85%;
-}
-
 code[class*="language"] {
 	--tab-size: 2;
 
@@ -27,6 +23,7 @@ code[class*="language"] {
 code:not([class*="language"]) {
 	border: 1px solid var(--text-color);
 	border-radius: 2px;
+	font-size: 85%;
 	margin: 0 1px;
 	padding: 1px 3px;
 }
@@ -39,6 +36,9 @@ pre {
 	border: 2px solid var(--text-color);
 	border-radius: var(--border-radius);
 	color: var(--text-color);
+
+	/* Set here, not on the inner `code`, so the line height follows the code's font size. */
+	font-size: 85%;
 	overflow-x: auto;
 	padding: 12px;
 }
@@ -64,7 +64,7 @@ pre {
 	color: var(--background-color);
 	display: flex;
 	flex-flow: column wrap;
-	font-family: monospace, monospace;
+	font-family: ui-monospace, monospace;
 	justify-content: space-between;
 	padding: 4px;
 }

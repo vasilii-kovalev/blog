@@ -1,5 +1,5 @@
 ---
-import { type GetStaticPaths } from "astro";
+import { type GetStaticPaths, type GetStaticPathsItem } from "astro";
 import { type CollectionEntry, getCollection, render } from "astro:content";
 
 import Header from "@/components/header.astro";
@@ -17,7 +17,7 @@ const source = `https://github.com/vasilii-kovalev/blog/blob/main/${post.filePat
 export const getStaticPaths: GetStaticPaths = async () => {
 	const postsCollection = await getCollection("posts");
 
-	return postsCollection.map((entry) => {
+	return postsCollection.map<GetStaticPathsItem>((entry) => {
 		return {
 			params: {
 				id: entry.id,

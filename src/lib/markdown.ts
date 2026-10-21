@@ -1,7 +1,4 @@
-import { type Root as HtmlRoot } from "hast";
-import { toText } from "hast-util-to-text";
-import { type Code, type Root as MarkdownRoot, type Parent } from "mdast";
-import { visit } from "unist-util-visit";
+import { defineHastPlugin, defineMdastPlugin, type HastPluginDefinition } from "satteri";
 
 const escapeHtml = (value: string): string => {
 	return value.replace(/[&<>"']/gu, (character) => {
@@ -36,43 +33,24 @@ const createCodeCaption = (label: string, file: string | null): string => {
 	)}</dd>${fileCaption}</dl></figcaption>`;
 };
 
-const captionNodeCount = 3;
+const codeCaptions = defineMdastPlugin({
+	code: (node, context) => {
+		const { file, label } = getCaptionParts(node.meta ?? "");
 
-const addCodeCaption = (node: Code, index: number, parent: Parent): number => {
-	const { meta } = node;
-
-	if (typeof meta !== "string" || meta === "") {
-		return index;
-	}
-
-	const { file, label } = getCaptionParts(meta);
-
-	if (label === null) {
-		return index;
-	}
-
-	const caption = createCodeCaption(label, file);
-	node.meta = null;
-
-	parent.children.splice(index, 1, { type: "html", value: caption }, node, {
-		type: "html",
-		value: "</figure>",
-	});
-
-	return index + captionNodeCount;
-};
-
-const codeCaptions = (): ((tree: MarkdownRoot) => void) => {
-	return (tree: MarkdownRoot): void => {
-		visit(tree, "code", (node, index, parent) => {
-			if (typeof index !== "number" || !parent) {
-				return 0;
-			}
-
-			return addCodeCaption(node, index, parent);
-		});
-	};
-};
+		if (label !== null) {
+			context.replaceNode(node, [
+				{
+					raw: createCodeCaption(label, file),
+				},
+				node,
+				{
+					raw: "</figure>",
+				},
+			]);
+		}
+	},
+	name: "code-captions",
+});
 
 const getHeadingId = (slug: string, used: Set<string>): string => {
 	let id = slug;
@@ -87,32 +65,47 @@ const getHeadingId = (slug: string, used: Set<string>): string => {
 	return id;
 };
 
-const headingLinks = (): ((tree: HtmlRoot) => void) => {
-	return (tree: HtmlRoot): void => {
-		const used = new Set<string>();
+// A factory, so every page starts with no used IDs.
+const headingLinks = (): HastPluginDefinition => {
+	const used = new Set<string>();
 
-		visit(tree, "element", (node) => {
-			if (!/^h[1-6]$/u.test(node.tagName)) {
-				return;
-			}
+	return defineHastPlugin({
+		element: {
+			filter: ["h1", "h2", "h3", "h4", "h5", "h6"],
+			visit: (node, context) => {
+				// Match markdown-it-anchor's original IDs, including encoded Unicode.
+				const slug = encodeURIComponent(context.textContent(node).trim().toLowerCase().replace(/\s+/gu, "-"));
+				const id = getHeadingId(slug, used);
 
-			// Match markdown-it-anchor's original IDs, including encoded Unicode.
-			const slug = encodeURIComponent(toText(node).trim().toLowerCase().replace(/\s+/gu, "-"));
-
-			const id = getHeadingId(slug, used);
-
-			node.properties.id = id;
-			node.properties.tabIndex = -1;
-			node.children = [
-				{
-					children: node.children,
-					properties: { className: ["header-anchor"], href: `#${id}` },
-					tagName: "a",
-					type: "element",
-				},
-			];
-		});
-	};
+				return {
+					...node,
+					children: [
+						{
+							children: node.children,
+							properties: { className: ["header-anchor"], href: `#${id}` },
+							tagName: "a",
+							type: "element",
+						},
+					],
+					properties: { ...node.properties, id, tabIndex: -1 },
+				};
+			},
+		},
+		name: "heading-links",
+	});
 };
 
-export { codeCaptions, headingLinks };
+/*
+	Available as `remarkPluginFrontmatter.searchText` from `render()`.
+	Raw HTML, such as code captions, is not part of the text.
+*/
+const searchText = defineHastPlugin({
+	after: (root, context) => {
+		if (context.data.astro) {
+			context.data.astro.frontmatter.searchText = context.textContent(root);
+		}
+	},
+	name: "search-text",
+});
+
+export { codeCaptions, headingLinks, searchText };

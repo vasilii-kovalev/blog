@@ -1,43 +1,45 @@
-import { getCollection } from "astro:content";
+import { type CollectionEntry, getCollection, render } from "astro:content";
 
-import { postUrl } from "./posts";
-import { extractSearchText, indexVersion, type SearchIndex } from "./search";
+import { type SearchDocument } from "./search-client";
 
-let index: Promise<SearchIndex> | null = null;
-const version = indexVersion(new Date());
+interface SearchIndex {
+	documents: Array<SearchDocument>;
+	version: string;
+}
 
-const buildSearchIndex = async (): Promise<SearchIndex> => {
-	const posts = await getCollection("posts");
+const getSearchDocument = async (post: CollectionEntry<"posts">): Promise<SearchDocument> => {
+	const { headings, remarkPluginFrontmatter } = await render(post);
+	const body: unknown = remarkPluginFrontmatter.searchText;
+
+	if (typeof body !== "string") {
+		throw new TypeError(`Missing search text for post: ${post.id}`);
+	}
 
 	return {
-		documents: posts.map((post) => {
-			if (!post.rendered) {
-				throw new Error(`Missing rendered content for post: ${post.id}`);
-			}
-
-			return {
-				description: post.data.description,
-				id: post.id,
-				title: post.data.title,
-				url: postUrl(post.id, import.meta.env.BASE_URL),
-				...extractSearchText(post.rendered.html),
-			};
-		}),
-		version,
+		body,
+		description: post.data.description,
+		headings: headings
+			.map<string>((heading) => {
+				return heading.text;
+			})
+			.join("\n"),
+		id: post.id,
+		title: post.data.title,
 	};
 };
 
+const hexRadix = 16;
+
 const getSearchIndex = async (): Promise<SearchIndex> => {
-	if (import.meta.env.DEV) {
-		return buildSearchIndex();
-	}
+	const posts = await getCollection("posts");
+	const documents = await Promise.all(posts.map<Promise<SearchDocument>>(getSearchDocument));
+	// The version is a hash of the content, so the index URL changes exactly when the index does.
+	const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(JSON.stringify(documents)));
 
-	// Share one build timestamp between the home page and the static endpoint.
-	index ??= buildSearchIndex();
-
-	const result = await index;
-
-	return result;
+	return {
+		documents,
+		version: new DataView(digest).getUint32(0).toString(hexRadix),
+	};
 };
 
 export { getSearchIndex };

@@ -25,6 +25,7 @@ npm ci
 - `prod:build` — Build the production site.
 - `prod:preview` — Serve the production build locally.
 - `prod:publish` — Build the site and publish it to GitHub Pages.
+- `astro:check` — Type-check Astro components and the rest of the project.
 - `format:check` — Check formatting.
 - `format:fix` — Apply formatting.
 - `lint:css:check` — Check CSS.
