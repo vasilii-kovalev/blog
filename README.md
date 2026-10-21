@@ -13,7 +13,7 @@ Incompatible versions fail at install.
 
 ### Setup
 
-From the repository root, install the locked dependencies:
+From the repository root, run the following commands to install dependencies:
 
 ```sh
 npm ci
