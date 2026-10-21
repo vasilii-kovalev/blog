@@ -1,9 +1,11 @@
 import { type CollectionEntry, getCollection, render } from "astro:content";
+import MiniSearch from "minisearch";
 
-import { type SearchDocument } from "./search-client";
+import { miniSearchOptions, type SearchDocument } from "./search";
 
 interface SearchIndex {
-	documents: Array<SearchDocument>;
+	// The serialized MiniSearch index. The browser loads it with `MiniSearch.loadJSON`.
+	json: string;
 	version: string;
 }
 
@@ -33,11 +35,16 @@ const hexRadix = 16;
 const getSearchIndex = async (): Promise<SearchIndex> => {
 	const posts = await getCollection("posts");
 	const documents = await Promise.all(posts.map<Promise<SearchDocument>>(getSearchDocument));
+	const miniSearch = new MiniSearch<SearchDocument>(miniSearchOptions);
+
+	miniSearch.addAll(documents);
+
+	const json = JSON.stringify(miniSearch);
 	// The version is a hash of the content, so the index URL changes exactly when the index does.
-	const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(JSON.stringify(documents)));
+	const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(json));
 
 	return {
-		documents,
+		json,
 		version: new DataView(digest).getUint32(0).toString(hexRadix),
 	};
 };

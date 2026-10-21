@@ -1,12 +1,6 @@
 import MiniSearch from "minisearch";
 
-interface SearchDocument {
-	id: string;
-	title: string;
-	description: string;
-	headings: string;
-	body: string;
-}
+import { miniSearchOptions } from "./search";
 
 // Returns the IDs of the matching posts, the most relevant first.
 type Search = (query: string) => Array<string>;
@@ -21,57 +15,14 @@ interface SearchElements {
 	retry: HTMLElement;
 }
 
-const isSearchDocument = (value: unknown): value is SearchDocument => {
-	return (
-		typeof value === "object" &&
-		value !== null &&
-		"id" in value &&
-		typeof value.id === "string" &&
-		"title" in value &&
-		typeof value.title === "string" &&
-		"description" in value &&
-		typeof value.description === "string" &&
-		"headings" in value &&
-		typeof value.headings === "string" &&
-		"body" in value &&
-		typeof value.body === "string"
-	);
-};
-
-const fetchSearchDocuments = async (url: string): Promise<Array<SearchDocument>> => {
+const loadSearch = async (url: string): Promise<Search> => {
 	const response = await fetch(url);
 
 	if (!response.ok) {
 		throw new Error(`Search index request failed (${response.status}).`);
 	}
 
-	const value: unknown = await response.json();
-
-	if (!Array.isArray(value)) {
-		throw new TypeError("Invalid search index.");
-	}
-
-	const documents: Array<unknown> = value;
-
-	if (!documents.every(isSearchDocument)) {
-		throw new TypeError("Invalid search index documents.");
-	}
-
-	return documents;
-};
-
-const loadSearch = async (url: string): Promise<Search> => {
-	const miniSearch = new MiniSearch<SearchDocument>({
-		fields: ["title", "description", "headings", "body"],
-		searchOptions: {
-			boost: { headings: 20, title: 30 },
-			combineWith: "AND",
-			fuzzy: 0.2,
-			prefix: true,
-		},
-	});
-
-	miniSearch.addAll(await fetchSearchDocuments(url));
+	const miniSearch = MiniSearch.loadJSON(await response.text(), miniSearchOptions);
 
 	return (query) => {
 		const searchResults = miniSearch.search(query);
@@ -171,4 +122,4 @@ const initSearch = (): void => {
 	void load();
 };
 
-export { initSearch, type SearchDocument };
+export { initSearch };
