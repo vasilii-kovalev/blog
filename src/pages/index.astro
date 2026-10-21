@@ -1,11 +1,12 @@
 ---
 import { getCollection } from "astro:content";
-import Page from "../layouts/page.astro";
-import Header from "../components/header.astro";
-import Search from "../components/search";
-import { postUrl } from "../lib/posts";
-import { getSearchIndex } from "../lib/search-index";
-import "../styles/home.css";
+
+import Header from "@/components/header.astro";
+import { Search } from "@/components/search";
+import Page from "@/layouts/page.astro";
+import { postUrl } from "@/lib/posts";
+import { getSearchIndex } from "@/lib/search-index";
+import "@/styles/home.css";
 
 const posts = await getCollection("posts");
 const index = await getSearchIndex();

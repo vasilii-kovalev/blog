@@ -1,26 +1,24 @@
 import {
+	type Accessor,
 	createMemo,
 	createResource,
 	createSignal,
 	For,
+	type JSX,
 	onMount,
+	type Resource,
 	Show,
 } from "solid-js";
-import { createSearch } from "../lib/search-client";
-import type { SearchIndex } from "../lib/search-client";
-import "../styles/search.css";
 
-interface PostSummary {
-	url: string;
-	title: string;
-	description: string;
+import { createSearch, parseSearchIndex, type SearchEngine } from "@/lib/search-client";
+import "@/styles/search.css";
+
+interface UseSearchParams {
+	search: Resource<SearchEngine>;
+	retry: () => void;
 }
 
-export default function Search(props: {
-	indexUrl: string;
-	posts: PostSummary[];
-}) {
-	const [query, setQuery] = createSignal("");
+const useSearch = (indexUrl: Accessor<string>): UseSearchParams => {
 	const [attempt, setAttempt] = createSignal(0);
 	const [mounted, setMounted] = createSignal(false);
 
@@ -30,29 +28,113 @@ export default function Search(props: {
 
 	const [search] = createResource(
 		() => {
-			return mounted() ? attempt() : false;
+			if (mounted()) {
+				return attempt();
+			}
+
+			return false;
 		},
 		async () => {
-			const response = await fetch(props.indexUrl);
+			const response = await fetch(indexUrl());
 
 			if (!response.ok) {
 				throw new Error(`Search index request failed (${response.status}).`);
 			}
 
-			const index: SearchIndex = await response.json();
+			const value: unknown = await response.json();
+			const index = parseSearchIndex(value);
 
 			return createSearch(index.documents);
 		},
 	);
 
+	return {
+		retry: () => {
+			setAttempt(attempt() + 1);
+		},
+		search,
+	};
+};
+
+const resultLabel = (count: number): string => {
+	if (count === 1) {
+		return "result";
+	}
+
+	return "results";
+};
+
+interface PostSummary {
+	url: string;
+	title: string;
+	description: string;
+}
+
+interface SearchProps {
+	posts: Array<PostSummary>;
+	search: Resource<SearchEngine>;
+	query: string;
+}
+
+const SearchResults = (props: SearchProps): JSX.Element => {
 	const results = createMemo(() => {
-		if (!query().trim() || search.loading || search.error) {
+		if (props.query.trim() === "" || props.search.loading || props.search.state === "errored") {
 			return props.posts;
 		}
 
-		const engine = search();
+		const engine = props.search();
 
-		return engine ? engine.search(query().trim()) : props.posts;
+		if (engine) {
+			return engine.search(props.query.trim());
+		}
+		return props.posts;
+	});
+
+	return (
+		<div id="search-results" aria-busy={props.search.loading}>
+			<Show when={props.query.trim() !== "" && !props.search.loading && props.search.state !== "errored"}>
+				<p role="status">
+					{results().length} {resultLabel(results().length)}
+				</p>
+			</Show>
+			<ul>
+				<For each={results()}>
+					{(result) => {
+						return (
+							<li>
+								<a href={result.url}>{result.title}</a>
+								<p>{result.description}</p>
+							</li>
+						);
+					}}
+				</For>
+			</ul>
+		</div>
+	);
+};
+
+const SearchStatus = (props: { search: Resource<SearchEngine>; retry: () => void }): JSX.Element => {
+	return (
+		<>
+			<Show when={props.search.loading}>
+				<p role="status">Loading search…</p>
+			</Show>
+			<Show when={props.search.state === "errored"}>
+				<p role="alert">
+					Search could not be loaded. You can still use the post list below.{" "}
+					<button type="button" onClick={props.retry}>
+						Retry
+					</button>
+				</p>
+			</Show>
+		</>
+	);
+};
+
+const Search = (props: { indexUrl: string; posts: Array<PostSummary> }): JSX.Element => {
+	const [query, setQuery] = createSignal("");
+	const { search, retry } = useSearch(() => {
+		return props.indexUrl;
 	});
 
 	return (
@@ -68,41 +150,10 @@ export default function Search(props: {
 				}}
 				aria-controls="search-results"
 			/>
-			<Show when={search.loading}>
-				<p role="status">Loading search…</p>
-			</Show>
-			<Show when={search.error}>
-				<p role="alert">
-					Search could not be loaded. You can still use the post list below.{" "}
-					<button
-						type="button"
-						onClick={() => {
-							setAttempt(attempt() + 1);
-						}}
-					>
-						Retry
-					</button>
-				</p>
-			</Show>
-			<div id="search-results" aria-busy={search.loading}>
-				<Show when={query().trim() && !search.loading && !search.error}>
-					<p role="status">
-						{results().length} {results().length === 1 ? "result" : "results"}
-					</p>
-				</Show>
-				<ul>
-					<For each={results()}>
-						{(result) => {
-							return (
-								<li>
-									<a href={result.url}>{result.title}</a>
-									<p>{result.description}</p>
-								</li>
-							);
-						}}
-					</For>
-				</ul>
-			</div>
+			<SearchStatus search={search} retry={retry} />
+			<SearchResults search={search} query={query()} posts={props.posts} />
 		</div>
 	);
-}
+};
+
+export { Search };

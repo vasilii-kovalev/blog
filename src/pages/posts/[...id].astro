@@ -1,19 +1,11 @@
 ---
-import { getCollection, render } from "astro:content";
-import type { CollectionEntry } from "astro:content";
-import Page from "../../layouts/page.astro";
-import Header from "../../components/header.astro";
-import { formatPublicationDate } from "../../lib/posts";
-import "../../styles/post.css";
+import { type GetStaticPaths } from "astro";
+import { type CollectionEntry, getCollection, render } from "astro:content";
 
-export async function getStaticPaths() {
-	return (await getCollection("posts")).map((post) => {
-		return {
-			params: { id: post.id },
-			props: { post },
-		};
-	});
-}
+import Header from "@/components/header.astro";
+import Page from "@/layouts/page.astro";
+import { formatPublicationDate } from "@/lib/posts";
+import "@/styles/post.css";
 
 interface Props {
 	post: CollectionEntry<"posts">;
@@ -21,6 +13,21 @@ interface Props {
 const { post } = Astro.props;
 const { Content } = await render(post);
 const source = `https://github.com/vasilii-kovalev/blog/blob/main/${post.filePath}`;
+
+export const getStaticPaths: GetStaticPaths = async () => {
+	const postsCollection = await getCollection("posts");
+
+	return postsCollection.map((entry) => {
+		return {
+			params: {
+				id: entry.id,
+			},
+			props: {
+				post: entry,
+			},
+		};
+	});
+};
 ---
 
 <Page title={post.data.title} description={post.data.description}>

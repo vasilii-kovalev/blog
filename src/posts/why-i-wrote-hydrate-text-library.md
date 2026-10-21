@@ -14,8 +14,8 @@ On one of my projects at work, we used [i18next](https://www.i18next.com/) libra
 
   ```javascript label="JavaScript" file="src/i18n/index.js"
   import i18n from "i18next";
-  import { initReactI18next } from "react-i18next";
   import LanguageDetector from "i18next-browser-languagedetector";
+  import { initReactI18next } from "react-i18next";
 
   import {
   	en,
@@ -151,8 +151,8 @@ On one of my projects at work, we used [i18next](https://www.i18next.com/) libra
   import * as React from "react";
   import ReactDOM from "react-dom";
 
-  import "./i18n";
   import { App } from "./app";
+  import "./i18n";
 
   ReactDOM.render(
   	<React.StrictMode>
@@ -407,9 +407,7 @@ I like the API of the `t` function (path to a localization string and a bunch of
   	TypeScript will be complaining that values of translations are not the same
   	as paths ones.
   */
-  type GetDictionary<Type> = Type extends string
-  	? string
-  	: { [Path in Keys<Type>]: GetDictionary<Type[Path]> };
+  type GetDictionary<Type> = Type extends string ? string : { [Path in Keys<Type>]: GetDictionary<Type[Path]> };
 
   type Dictionary = GetDictionary<typeof dictionary>;
 
@@ -426,7 +424,6 @@ I like the API of the `t` function (path to a localization string and a bunch of
 
   ```typescript label="TypeScript" file="src/i18n/dictionaries/index.ts"
   import { Dictionaries } from "../types";
-
   import { englishDictionary as en } from "./en";
   import { russianDictionary as ru } from "./ru";
   // ... other dictionaries
@@ -614,19 +611,11 @@ I like the API of the `t` function (path to a localization string and a bunch of
   const textResolver =
   	(dictionary: Dictionary): HydrateText =>
   	(pathOrText, variables, interpolationOptions) => {
-  		return hydrateText(
-  			get(dictionary, pathOrText, pathOrText),
-  			variables,
-  			interpolationOptions,
-  		);
+  		return hydrateText(get(dictionary, pathOrText, pathOrText), variables, interpolationOptions);
   	};
 
-  const isSupportedLanguage = (
-  	language: string | null,
-  ): language is SupportedLanguage => {
-  	return Object.values(SUPPORTED_LANGUAGES_MAP).includes(
-  		language as SupportedLanguage,
-  	);
+  const isSupportedLanguage = (language: string | null): language is SupportedLanguage => {
+  	return Object.values(SUPPORTED_LANGUAGES_MAP).includes(language as SupportedLanguage);
   };
 
   export { textResolver, isSupportedLanguage };

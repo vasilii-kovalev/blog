@@ -1,6 +1,0 @@
-# Artifacts
-dist
-.astro
-
-# Astro formatting support will be added with the formatter upgrade.
-*.astro

@@ -1,12 +1,33 @@
 import { getCollection } from "astro:content";
-import { extractSearchText, indexVersion } from "./search";
-import type { SearchIndex } from "./search";
-import { postUrl } from "./posts";
 
-let index: Promise<SearchIndex> | undefined;
+import { postUrl } from "./posts";
+import { extractSearchText, indexVersion, type SearchIndex } from "./search";
+
+let index: Promise<SearchIndex> | null = null;
 const version = indexVersion(new Date());
 
-export function getSearchIndex(): Promise<SearchIndex> {
+const buildSearchIndex = async (): Promise<SearchIndex> => {
+	const posts = await getCollection("posts");
+
+	return {
+		documents: posts.map((post) => {
+			if (!post.rendered) {
+				throw new Error(`Missing rendered content for post: ${post.id}`);
+			}
+
+			return {
+				description: post.data.description,
+				id: post.id,
+				title: post.data.title,
+				url: postUrl(post.id, import.meta.env.BASE_URL),
+				...extractSearchText(post.rendered.html),
+			};
+		}),
+		version,
+	};
+};
+
+const getSearchIndex = async (): Promise<SearchIndex> => {
 	if (import.meta.env.DEV) {
 		return buildSearchIndex();
 	}
@@ -14,25 +35,9 @@ export function getSearchIndex(): Promise<SearchIndex> {
 	// Share one build timestamp between the home page and the static endpoint.
 	index ??= buildSearchIndex();
 
-	return index;
-}
+	const result = await index;
 
-async function buildSearchIndex(): Promise<SearchIndex> {
-	const posts = await getCollection("posts");
-	return {
-		version,
-		documents: posts.map((post) => {
-			if (!post.rendered) {
-				throw new Error(`Missing rendered content for post: ${post.id}`);
-			}
+	return result;
+};
 
-			return {
-				id: post.id,
-				url: postUrl(post.id, import.meta.env.BASE_URL),
-				title: post.data.title,
-				description: post.data.description,
-				...extractSearchText(post.rendered.html),
-			};
-		}),
-	};
-}
+export { getSearchIndex };

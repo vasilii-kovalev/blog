@@ -18,7 +18,7 @@ code[class*="language"] {
 	white-space: pre-wrap;
 }
 
-@media (min-width: 640px) {
+@media (width >= 640px) {
 	code[class*="language"] {
 		--tab-size: 4;
 	}
@@ -85,7 +85,7 @@ pre {
 
 .code-header__file {
 	font-size: 75%;
-	word-break: break-word;
+	overflow-wrap: anywhere;
 }
 
 .code-header + pre {
@@ -99,7 +99,6 @@ pre {
 }
 
 .visually-hidden {
-	clip: rect(0 0 0 0);
 	clip-path: inset(50%);
 	height: 1px;
 	overflow: hidden;

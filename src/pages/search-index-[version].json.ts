@@ -1,14 +1,28 @@
-import type { APIRoute, GetStaticPaths } from "astro";
-import { getSearchIndex } from "../lib/search-index";
+import { type APIRoute, type GetStaticPaths } from "astro";
 
-export const getStaticPaths: GetStaticPaths = async () => {
+import { getSearchIndex } from "@/lib/search-index";
+
+const getStaticPaths: GetStaticPaths = async () => {
 	const index = await getSearchIndex();
 
-	return [{ params: { version: index.version }, props: { index } }];
+	return [
+		{
+			params: {
+				version: index.version,
+			},
+			props: {
+				index,
+			},
+		},
+	];
 };
 
-export const GET: APIRoute = ({ props }) => {
+const GET: APIRoute = ({ props }) => {
 	return new Response(JSON.stringify(props.index), {
-		headers: { "Content-Type": "application/json; charset=utf-8" },
+		headers: {
+			"Content-Type": "application/json; charset=utf-8",
+		},
 	});
 };
+
+export { GET, getStaticPaths };

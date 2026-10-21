@@ -1,15 +1,13 @@
 {
-	"[javascript]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode",
-		"editor.formatOnSave": true
-	},
 	"editor.codeActionsOnSave": {
-		"source.fixAll.markdownlint": "explicit",
-		"source.fixAll.stylelint": "explicit"
+		"source.fixAll.stylelint": "always",
+		"source.format.oxc": "always",
+		"source.fixAll.oxc": "always"
 	},
-	"markdownlint.config": {
-		"no-hard-tabs": {
-			"code_blocks": false
-		}
-	}
+	"editor.defaultFormatter": "oxc.oxc-vscode",
+	"editor.formatOnSave": false,
+	"js/ts.tsdk.path": "./node_modules/typescript",
+	"stylelint.ignorePath": "${workspaceFolder}/.gitignore",
+	"stylelint.lintFiles.glob": "**/*.css",
+	"stylelint.validate": ["css"]
 }
