@@ -1,5 +1,7 @@
 # Vasilii Kovalev's blog
 
+Why the repository is arranged this way is in [`docs/architecture.md`](./docs/architecture.md).
+
 ## Installation
 
 ### Node.js and npm

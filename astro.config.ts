@@ -5,7 +5,6 @@ import { codeCaptions, headingLinks, searchText } from "./src/lib/markdown.ts";
 
 const config = defineConfig({
 	base: "/blog",
-	compressHTML: true,
 	markdown: {
 		processor: satteri({
 			features: {

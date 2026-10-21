@@ -1,7 +1,20 @@
 /** @type {import("stylelint").Config} */
 const config = {
 	extends: ["stylelint-config-standard"],
-	ignoreFiles: ["src/styles/normalize.css"],
+	overrides: [
+		{
+			files: ["src/styles/normalize.css"],
+			rules: {
+				/*
+					The file is vendored from normalize.css. Its vendor prefixes target the browsers it corrects,
+					so the prefix rules stay off to keep the file as close to upstream as possible.
+				*/
+				"property-no-vendor-prefix": null,
+				"selector-no-vendor-prefix": null,
+				"value-no-vendor-prefix": null,
+			},
+		},
+	],
 	plugins: ["stylelint-order"],
 	rules: {
 		"order/custom-properties-alphabetical-order": true,

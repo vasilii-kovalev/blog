@@ -1,6 +1,19 @@
 {
 	"ignorePaths": ["./LICENSE"],
-	"ignoreWords": ["kovalev", "languagedetector", "minisearch", "nojekyll", "satteri", "tsgolint", "vasilii"],
+	"ignoreWords": [
+		"eperm",
+		"frontmatter",
+		"kovalev",
+		"languagedetector",
+		"lightningcss",
+		"minisearch",
+		"nojekyll",
+		"orama",
+		"satteri",
+		"sätteri",
+		"tsgolint",
+		"vasilii"
+	],
 	"import": ["@cspell/dict-ru_ru/cspell-ext.json"],
 	"language": "en,ru",
 	"useGitignore": true,

@@ -75,7 +75,10 @@ main {
 
 /**
  * 1. Correct the inheritance and scaling of font size in all browsers.
- *    Upstream uses `monospace, monospace`, which the CSS minifier collapses into `monospace`.
+ *    Upstream uses `monospace, monospace`, which the CSS minifier collapses into `monospace`
+ *    (https://github.com/parcel-bundler/lightningcss/issues/1221). Once that is fixed, restore the
+ *    upstream value and add `"font-family-no-duplicate-names": null` to the Stylelint override for
+ *    this file, because that rule rejects the intentional duplicate.
  * 2. Correct the odd `em` font sizing in all browsers.
  */
 
@@ -115,7 +118,10 @@ strong {
 
 /**
  * 1. Correct the inheritance and scaling of font size in all browsers.
- *    Upstream uses `monospace, monospace`, which the CSS minifier collapses into `monospace`.
+ *    Upstream uses `monospace, monospace`, which the CSS minifier collapses into `monospace`
+ *    (https://github.com/parcel-bundler/lightningcss/issues/1221). Once that is fixed, restore the
+ *    upstream value and add `"font-family-no-duplicate-names": null` to the Stylelint override for
+ *    this file, because that rule rejects the intentional duplicate.
  * 2. Correct the odd `em` font sizing in all browsers.
  */
 
