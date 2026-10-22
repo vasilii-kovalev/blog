@@ -16,17 +16,17 @@ Several decisions below keep the Eleventy output unchanged, so existing links ke
 
 ## Hosting
 
-GitHub Pages hosts the site as a project site under `https://vasilii-kovalev.github.io/blog/`.
+GitHub Pages is the only deployment target. It keeps hosting beside the source repository, costs nothing for this project, and avoids a dedicated server. The site is a project site under `https://vasilii-kovalev.github.io/blog/`.
 
-Publishing is a local step: `prod:publish` builds the site and pushes `dist/` to the `gh-pages` branch with the `gh-pages` package. There is no deployment workflow. A local step is simpler to maintain and operate, and small commits do not start a deployment on every push.
+Publishing is a local step: `prod:publish` builds the site, and the `gh-pages` package pushes `dist/` to the root of the `gh-pages` branch. There is no deployment workflow in the repository. A local step is simpler to maintain and operate, and small commits do not start a deployment on every push.
 
-GitHub Pages runs Jekyll on a published branch unless a `.nojekyll` file is present. Jekyll would treat the generated site as source and omit names that start with `_`, including Astro's `_astro/` assets. Publishing passes `--nojekyll`, which adds that file to the published branch only.
+GitHub Pages runs Jekyll on a published branch unless a `.nojekyll` file is present. Jekyll would treat the generated site as source and omit names that start with `_` or `.`, including Astro's `_astro/` assets. Publishing passes `--nojekyll` so Pages serves the tree unchanged. That file is added to the published branch, not to `dist/` on `main`.
 
 `base` is `/blog` in every mode, so the development server uses the same URLs as production. Internal links are built from `import.meta.env.BASE_URL`.
 
 Pages serves a directory's `index.html` at the URL with a trailing slash and redirects the URL without one. Astro writes every page as `<path>/index.html`, and `trailingSlash: "always"` matches that form, so internal links never go through the redirect. With that setting, `BASE_URL` always ends with `/`, and paths are joined with plain template strings.
 
-Pages decides caching and content types on its own. Every file, including content-hashed assets, is served with a ten-minute `Cache-Control: max-age`, and `Content-Type` comes from the file extension. Response headers set in an Astro endpoint therefore reach only the development server.
+Pages decides caching on its own. Every file, including content-hashed assets, is served with a ten-minute `Cache-Control: max-age`. `Content-Type` comes from the file extension. Response headers set in an Astro endpoint therefore reach only the development server.
 
 ## Content
 
@@ -74,11 +74,11 @@ The index loads as soon as the home page does. A `preload` link starts the reque
 
 The post list is rendered on the server, newest first, so the page is complete without JavaScript and before the index arrives. The script only reorders and hides those list items by post ID, so the markup stays in the template.
 
-There is no UI framework. The first Astro version rendered search with Solid, chosen because it is closer to React than Svelte, which the article uses. Search is the only interactive feature, though, and a plain script is enough. The script finds its elements by ID and fails fast when one is missing, because nothing else checks that the template and the script agree.
+There is no UI framework. The first Astro version rendered search with Solid, chosen because it is closer to React than Svelte, which the article uses. Search is the only interactive feature, though, and a plain script is enough. The script finds its elements by ID and fails fast when a required element is missing, because nothing else checks that the template and the script agree. The checks also narrow the element types.
 
 ## Styles
 
-Styles are plain CSS without a preprocessor.
+Styles are plain CSS. Modern CSS already provides the features this project needs, including custom properties, without a preprocessor.
 
 `normalize.css` is vendored and imported with `@import` at the top of `common.css`, which keeps it ahead of every other rule. As a JavaScript import, it would be subject to the formatter's import sorting.
 
@@ -88,9 +88,11 @@ The vendored copy differs from upstream in one place: `ui-monospace, monospace` 
 
 ### Node.js and npm
 
-npm 12 is required because its install-time security defaults are stricter than earlier majors. The Node.js range copies npm 12's own `engines.node`. Both are recorded only in the `devEngines` field — there is no `engines` field, `packageManager` field, or `.node-version` file — and an incompatible version stops the install. Selecting a compatible Node.js and npm remains a local responsibility.
+Node.js and npm were chosen because they are already familiar and because the rest of the tools run on Node.js anyway.
 
-`.npmrc` sets `save-exact` and `min-release-age=3`. Every dependency uses an exact version, so a release younger than three days cannot be installed. The lockfile is committed, and a clean install uses `npm ci`.
+npm 12 was chosen because its install-time security defaults are stricter than earlier majors. The Node.js range is recorded only in the `devEngines` field — there is no `engines` field, top-level `packageManager` field, or `.node-version` file — and copies npm 12's own `engines.node`, so the two stay aligned. Odd-numbered short-lived lines such as 23 and 25 are omitted. Every allowed version can run TypeScript config files directly, without a compile step. An incompatible version stops the install. Selecting a compatible Node.js and npm version remains a local responsibility.
+
+`.npmrc` sets `save-exact` and `min-release-age=3`. Every dependency and development dependency uses an exact version. The lockfile is committed, and a clean install uses `npm ci`.
 
 `dependencies` lists only code that ships to the browser, which is MiniSearch. Everything else runs at build or development time.
 
@@ -100,18 +102,20 @@ Small helpers, such as HTML escaping, are written by hand. A general-purpose uti
 
 ### TypeScript
 
+The `typescript` package provides the editor language server and `tsc`; Oxlint's type-aware rules use `oxlint-tsgolint` instead.
+
 Type errors come from two commands. `lint:ts:check` runs Oxlint with type checking, which covers TypeScript files but not `.astro` templates; `astro:check` covers those. Both depend on the types Astro generates in `.astro/`. Any Astro command creates them, `astro:check` included, so on a fresh clone `lint:ts:check` reports a missing `astro:content` module until one has run.
 
 There is no `@types/node`. Build code uses only standard globals that Node.js implements, such as `crypto.subtle` and `TextEncoder`, and TypeScript's DOM library already types them.
 
+`@/` reaches a file under `src/`. Files in nested directories use `@/` because parent-relative imports are forbidden.
+
 ### Lint and format
 
-Oxlint and Oxfmt are used for speed. Oxlint enables every category except `nursery`, which holds rules still under development. CSpell checks English and Russian because the existing post contains Russian text. All tools read `.gitignore`, so the generated `dist/` and `.astro/` directories are skipped.
+Lint and format commands are plain npm scripts without caching. They run rarely enough that caching would not pay off.
 
-Code follows two goals, consistency and strict types. Oxlint enforces most of the conventions; two are kept by hand.
+Oxlint and Oxfmt are used for speed. Oxlint enables every category except `nursery`, which the Oxlint docs mark as unstable by design. Oxfmt reads indentation and line width from `.editorconfig`: tabs, with spaces in Markdown. CSpell checks English and Russian because the existing post contains Russian text.
 
-Each module in `src/` ends with one `export { … }` statement. Exports at the bottom mirror imports at the top and state the module's contract. Oxlint has no rule against a single inline `export const`, so this is a convention. In `.astro` frontmatter, Astro only finds `getStaticPaths` when it is exported where it is declared, so that export stays inline; endpoints in `.ts` files follow the convention.
+Generated and tooling output lives in `.gitignore`. All tools read `.gitignore`, so the generated `dist/` and `.astro/` directories are skipped. Oxfmt, Stylelint, Markdownlint, and CSpell follow the same ignore file.
 
-Array methods that can change the shape of the data, such as `map`, `flatMap`, and `reduce`, receive an explicit type argument, and functions declare their return types. A mismatch is then reported where the value is defined, not where it is used, possibly in another file. Oxlint requires the return types but has no rule for the type arguments.
-
-On Windows, the VS Code Oxc extension keeps the Oxlint and Oxfmt native binaries open, so `npm ci` fails with `EPERM` while it runs. Reload the window or stop the extension's language servers first.
+Stylelint checks the CSS: Oxlint does not lint it, and Oxfmt formats it without validating it. The configuration is `stylelint.config.mjs`. A TypeScript config would load through Cosmiconfig, and Cosmiconfig 9 does not work with TypeScript 7 without pinning a newer Cosmiconfig. Plain ESM avoids maintaining that pin; the config shape is checked with a JSDoc `@type` instead.
