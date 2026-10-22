@@ -108,7 +108,9 @@ Small helpers, such as HTML escaping, are written by hand. A general-purpose uti
 
 The `typescript` package provides the editor language server and `tsc`; Oxlint's type-aware rules use `oxlint-tsgolint` instead.
 
-Type errors come from two commands. `lint:ts:check` runs Oxlint with type checking, which covers TypeScript files but not `.astro` templates; `astro:check` covers those. Both depend on the types Astro generates in `.astro/`. Any Astro command creates them, `astro:check` included, so on a fresh clone `lint:ts:check` reports a missing `astro:content` module until one has run.
+Type errors come from two commands. `lint:ts:check` runs Oxlint with type checking, which covers TypeScript files but not `.astro` templates; `astro:check` covers those. Both read the types Astro generates in `.astro/`. `lint:ts:check` runs `astro sync` first, which writes those types without checking them again, so the command works on a fresh clone. The sync is silent; a failure still stops the script. `astro:check` writes the same files as part of its own run.
+
+The config extends `astro/tsconfigs/strict`, which includes `.astro/types.d.ts`. That file references `astro/client`, for `import.meta.env`, and the generated `content.d.ts`, for the `astro:content` module and the `posts` collection. Referencing `astro/client` from this config would load Astro's stub of that module, whose collection types are `any`. A reference to `content.d.ts` cannot replace the sync, because that file is what the sync writes, and an include of a missing file is ignored. Chaining `astro:check` into the lint script would type-check the TypeScript twice and fold the template check into it. Astro's other presets, `base` and `strictest`, include the same generated file. `strictest` also enables unused-local checks, which Oxlint already owns.
 
 There is no `@types/node`. Build code uses only standard globals that Node.js implements, such as `crypto.subtle` and `TextEncoder`, and TypeScript's DOM library already types them.
 
