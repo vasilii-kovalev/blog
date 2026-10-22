@@ -32,7 +32,7 @@
 		"format:fix": "oxfmt",
 		"lint:css:check": "stylelint \"**/*.css\" --ignore-path .gitignore",
 		"lint:css:fix": "npm run lint:css:check -- --fix",
-		"lint:markdown:check": "markdownlint-cli2",
+		"lint:markdown:check": "node scripts/rumdl.ts",
 		"lint:markdown:fix": "npm run lint:markdown:check -- --fix",
 		"lint:spell:check": "cspell . --quiet --no-show-suggestions && cspell-check-unused-words",
 		"lint:ts:check": "astro sync --silent && oxlint --ignore-path .gitignore",
@@ -47,14 +47,15 @@
 		"@astrojs/compiler-rs": "0.5.2",
 		"@astrojs/markdown-satteri": "0.4.4",
 		"@cspell/dict-ru_ru": "2.3.4",
+		"@types/node": "22.20.5",
 		"astro": "7.4.0",
 		"cspell": "10.4.0",
 		"cspell-check-unused-words": "1.6.3",
 		"gh-pages": "6.3.0",
-		"markdownlint-cli2": "0.23.3",
 		"oxfmt": "0.73.0",
 		"oxlint": "1.88.0",
 		"oxlint-tsgolint": "7.0.2004",
+		"rumdl": "0.3.0",
 		"satteri": "0.10.5",
 		"stylelint": "17.16.0",
 		"stylelint-config-standard": "40.0.0",
@@ -64,11 +65,6 @@
 	"overrides": {
 		"make-dir": {
 			"semver": "6.3.1"
-		},
-		"markdownlint-cli2": {
-			"katex": "0.19.0",
-			"markdown-it": "15.0.3",
-			"smol-toml": "1.9.1"
 		}
 	},
 	"devEngines": {

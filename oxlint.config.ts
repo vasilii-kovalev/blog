@@ -23,6 +23,13 @@ const config = defineConfig({
 			},
 		},
 		{
+			files: ["scripts/*.ts"],
+			rules: {
+				// These scripts run in Node and need its built-in modules.
+				"import/no-nodejs-modules": "off",
+			},
+		},
+		{
 			files: ["**/*.astro"],
 			rules: {
 				// Astro frontmatter is a module even when it has no imports or exports.

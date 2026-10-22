@@ -5,8 +5,16 @@
 		"verbatimModuleSyntax": false,
 		// Oxlint checks unused locals and allows names starting with "_"; TypeScript cannot configure that exception.
 		"noUnusedLocals": false,
+		// `@types/node` belongs to `tsconfig.node.json`. An empty list keeps it out of pages and posts.
+		"types": [],
 		"paths": {
 			"@/*": ["${configDir}/src/*"]
 		}
-	}
+	},
+	"exclude": ["dist", "scripts", "oxlint.config.ts", "oxfmt.config.ts"],
+	"references": [
+		{
+			"path": "./tsconfig.node.json"
+		}
+	]
 }

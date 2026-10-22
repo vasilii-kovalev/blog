@@ -1,8 +1,10 @@
 {
+	// Oxc format/fix, Stylelint, and rumdl run as save code actions. `formatOnSave` would double-format.
 	"editor.codeActionsOnSave": {
-		"source.fixAll.stylelint": "always",
-		"source.format.oxc": "always",
-		"source.fixAll.oxc": "always"
+		"source.fixAll.rumdl": "explicit",
+		"source.fixAll.stylelint": "explicit",
+		"source.format.oxc": "explicit",
+		"source.fixAll.oxc": "explicit"
 	},
 	"editor.defaultFormatter": "oxc.oxc-vscode",
 	"editor.formatOnSave": false,
