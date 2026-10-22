@@ -1,7 +1,5 @@
 # Search engine comparison
 
-<!-- cspell:words Bitap flexsearch leeoniya ufuzzy nonexistentword orama -->
-
 Comparison date: **2026-10-22**.
 
 ## Scope and requirements

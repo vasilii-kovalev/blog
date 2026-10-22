@@ -1,18 +1,27 @@
 {
+	"files": ["**"],
 	"ignorePaths": ["./LICENSE"],
-	"ignoreWords": [
-		"frontmatter",
-		"kovalev",
-		"lightningcss",
-		"minisearch",
-		"nojekyll",
-		"satteri",
-		"sätteri",
-		"tsgolint",
-		"vasilii"
-	],
 	"import": ["@cspell/dict-ru_ru/cspell-ext.json"],
 	"language": "en,ru",
 	"useGitignore": true,
-	"version": "0.2"
+	"version": "0.2",
+	"words": [
+		"bitap",
+		"eperm",
+		"flexsearch",
+		"frontmatter",
+		"kovalev",
+		"languagedetector",
+		"leeoniya",
+		"lightningcss",
+		"minisearch",
+		"nojekyll",
+		"nonexistentword",
+		"orama",
+		"satteri",
+		"sätteri",
+		"tsgolint",
+		"ufuzzy",
+		"vasilii"
+	]
 }

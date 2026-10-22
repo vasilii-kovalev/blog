@@ -34,7 +34,7 @@ npm ci
 - `lint:css:fix` — Fix CSS lint issues.
 - `lint:markdown:check` — Check Markdown.
 - `lint:markdown:fix` — Fix Markdown lint issues.
-- `lint:spell:check` — Check spelling.
+- `lint:spell:check` — Check spelling and report unused words in the CSpell configuration.
 - `lint:ts:check` — Lint TypeScript and report type errors.
 - `lint:ts:fix` — Apply TypeScript lint fixes.
 

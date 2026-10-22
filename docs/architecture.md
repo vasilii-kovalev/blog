@@ -1,7 +1,5 @@
 # Architecture
 
-<!-- cspell:words EPERM -->
-
 This document records why the repository is arranged the way it is. What the project is, and how to install and run it, lives in the [README](../README.md).
 
 ## Constraints

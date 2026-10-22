@@ -34,7 +34,7 @@
 		"lint:css:fix": "npm run lint:css:check -- --fix",
 		"lint:markdown:check": "markdownlint \"**/*.md\" --ignore-path .gitignore",
 		"lint:markdown:fix": "npm run lint:markdown:check -- --fix",
-		"lint:spell:check": "cspell . --quiet --no-show-suggestions",
+		"lint:spell:check": "cspell . --quiet --no-show-suggestions && cspell-check-unused-words",
 		"lint:ts:check": "oxlint --ignore-path .gitignore",
 		"lint:ts:fix": "npm run lint:ts:check -- --fix"
 	},
@@ -48,6 +48,7 @@
 		"@cspell/dict-ru_ru": "2.3.4",
 		"astro": "7.4.0",
 		"cspell": "10.4.0",
+		"cspell-check-unused-words": "1.6.3",
 		"gh-pages": "6.3.0",
 		"markdownlint-cli": "0.49.1",
 		"oxfmt": "0.73.0",
