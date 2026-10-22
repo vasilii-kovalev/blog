@@ -44,7 +44,9 @@ Astro derives the type of `CollectionEntry<"posts">["data"]` from the schema typ
 
 Posts are rendered by Sätteri, Astro's default Markdown processor. The custom transforms are a few small plugins written against Sätteri's own API, so Astro's unified processor, whose advantage is the remark and rehype plugin ecosystem, would only add dependencies. `@astrojs/markdown-satteri` and `satteri` are direct dependencies because the config imports them. Their versions match the ones Astro depends on, so npm installs a single copy, and they move with every Astro upgrade.
 
-Smart punctuation is off, as it was in the Eleventy version. Syntax highlighting is off because the site's look is intentionally minimal: code blocks are plain monospace, without a highlighter's markup or theme. That may change once the design settles.
+Smart punctuation stays off. It would replace straight quotes, hyphens, and `...` with curly quotes, dashes, and `…`, which is closer to print punctuation. The plain characters are common enough on the web, and they are what find-in-page and editors match: `Gauss-Jordan` misses `Gauss–Jordan`. Search engines and other tools that quote or compare a passage can split the same way. Where a curly quote, a dash, or an ellipsis is needed, it is typed into the Markdown, so the source and the page contain the same character and a search or a debug session can use either.
+
+Syntax highlighting is off because the site's look is intentionally minimal: code blocks are plain monospace, without a highlighter's markup or theme. That may change once the design settles.
 
 A plugin adds a permalink to each heading, linking to the id Astro's heading plugin assigns. That plugin is registered first. Astro appends the same plugin after the custom ones and keeps an id that is already set, so the headings returned by `render()` carry it.
 
