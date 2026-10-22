@@ -1,5 +1,10 @@
 {
 	"files": ["**"],
+	"ignoreWords": [
+		"blogposts",
+		"blogfavicon",
+		"blogsearch"
+	],
 	"ignorePaths": ["./LICENSE"],
 	"import": ["@cspell/dict-ru_ru/cspell-ext.json"],
 	"language": "en,ru",

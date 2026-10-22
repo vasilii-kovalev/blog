@@ -6,9 +6,6 @@
 - [ ] Use the `tags` field to filter posts
   - [ ] Replace the Eleventy-style `post` tag with topic tags
   - [ ] Decide how filtering by tags should look: tag pages or a filter next to the search
-- [ ] Revisit the URLs with trailing slashes kept from Eleventy
-  - [ ] Check [`build.format: "file"`](https://docs.astro.build/en/reference/configuration-reference/#buildformat) with `trailingSlash: "never"` on GitHub Pages; `BASE_URL` then has no trailing slash, so paths are joined differently
-  - [ ] Keep existing post links working
 - [ ] Consider Astro's default heading IDs instead of the markdown-it-anchor ones kept from Eleventy, which would remove the custom ID logic
   - [ ] Check whether anything links to sections of existing posts
 - [ ] Decide whether to enable smart punctuation, which is off only to match the Eleventy output

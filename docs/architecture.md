@@ -26,6 +26,8 @@ GitHub Pages runs Jekyll on a published branch unless a `.nojekyll` file is pres
 
 Pages serves a directory's `index.html` at the URL with a trailing slash and redirects the URL without one. Astro writes every page as `<path>/index.html`, and `trailingSlash: "always"` matches that form, so internal links never go through the redirect. With that setting, `BASE_URL` always ends with `/`, and paths are joined with plain template strings.
 
+`build.format: "file"` with `trailingSlash: "never"` would write each post as `posts/<id>.html`. Pages serves that file at `/posts/<id>` and at `/posts/<id>.html`, and returns 404 for `/posts/<id>/`. Links from the Eleventy version end with `/`, so they would break. The home page would still be `index.html`. Pages treats the project site as a directory and redirects `/blog` to `/blog/`. With `trailingSlash: "never"`, `BASE_URL` is `/blog`, and the template-string joins become `/blogposts/…`, `/blogfavicon.ico`, and `/blogsearch-index-….json`. Astro's own asset URLs still include the slash. `astro preview` returns 200 for both `/blog` and `/blog/`, so it does not show the root redirect. The directory output stays.
+
 Pages decides caching on its own. Every file, including content-hashed assets, is served with a ten-minute `Cache-Control: max-age`. `Content-Type` comes from the file extension. Response headers set in an Astro endpoint therefore reach only the development server.
 
 ## Content
