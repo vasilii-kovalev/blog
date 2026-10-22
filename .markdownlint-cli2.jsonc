@@ -1,0 +1,14 @@
+{
+	/*
+		Globs stay in this file so Windows and Unix shells do not expand them differently.
+		`gitignore` replaces markdownlint-cli's `--ignore-path .gitignore`.
+	*/
+	"config": {
+		"line-length": false,
+		"no-hard-tabs": {
+			"code_blocks": false
+		}
+	},
+	"gitignore": ".gitignore",
+	"globs": ["**/*.md"]
+}
