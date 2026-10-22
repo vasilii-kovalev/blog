@@ -1,14 +1,11 @@
 {
 	"ignorePaths": ["./LICENSE"],
 	"ignoreWords": [
-		"eperm",
 		"frontmatter",
 		"kovalev",
-		"languagedetector",
 		"lightningcss",
 		"minisearch",
 		"nojekyll",
-		"orama",
 		"satteri",
 		"sätteri",
 		"tsgolint",

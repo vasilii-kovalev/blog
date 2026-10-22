@@ -1,5 +1,7 @@
 # Architecture
 
+<!-- cspell:words EPERM -->
+
 This document records why the repository is arranged the way it is. What the project is, and how to install and run it, lives in the [README](../README.md).
 
 ## Constraints
@@ -60,9 +62,9 @@ Behavior lives in `.ts` modules rather than in `.astro` files. Oxlint lints the 
 
 ## Search
 
-Search follows the approach of the Evil Martians article linked in the README: data prepared at build time, searched in the browser with MiniSearch. MiniSearch came from the article without evaluating alternatives. It provides full-text search, field boosts, and fuzzy matching. Boosts rank the title above headings, and headings above the body.
+Search uses MiniSearch with data prepared at build time and searched in the browser. It supports full-text search, field boosts, prefixes, fuzzy matching, and requiring every query term to match across the post's fields. Boosts rank the title above headings, and headings above the body. The [search engine comparison](./search-engine-comparison.md) covers alternatives, maintenance health, and conditions for changing engines.
 
-The article ships the documents and builds the index in the browser, because its results show highlighted snippets of the page text. Results here show only a title and a description, which the home page already contains. The build therefore creates the MiniSearch index and serializes it, and the browser restores it with `MiniSearch.loadJSON`. The download is smaller, the browser does no indexing, and it never inspects the documents: a malformed file fails inside `loadJSON` and shows the error message. The build and the browser import the MiniSearch options from one module, because an index can only be loaded with the options it was built with.
+Results show only a title and a description, which the home page already contains, so the full text of the blog posts does not need to be stored alongside the index. The build creates the MiniSearch index and serializes it, and the browser restores it with `MiniSearch.loadJSON`. The browser does no indexing and never inspects the documents: a malformed file fails inside `loadJSON` and shows the error message. The build and the browser import the MiniSearch options from one module, because an index can only be loaded with the options it was built with.
 
 The searchable text comes from a Sätteri plugin registered after the other custom plugins. It stores the text of the final page tree in the frontmatter that `render()` returns, so the build does not parse the rendered HTML again. Raw HTML is not part of that text, so code captions are not searchable.
 

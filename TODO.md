@@ -1,10 +1,5 @@
 # TODO
 
-- [ ] Compare MiniSearch with other client-side search libraries, since it was taken from the Evil Martians article without evaluating alternatives
-  - [ ] Check [Pagefind](https://pagefind.app)
-  - [ ] Check [Fuse.js](https://www.fusejs.io)
-  - [ ] Check [FlexSearch](https://github.com/nextapps-de/flexsearch)
-  - [ ] Check [Orama](https://github.com/oramasearch/orama)
 - [ ] Decide whether search results should show matching snippets, which would bring the post text back into the index
 - [ ] Decide whether code captions (language and file names) should be searchable
 - [ ] Check how the search index grows with the number of posts, and whether loading it on page load stays reasonable

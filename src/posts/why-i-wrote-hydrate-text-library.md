@@ -6,6 +6,8 @@ tags:
   - post
 ---
 
+<!-- cspell:words languagedetector -->
+
 ## Internationalization with i18next
 
 On one of my projects at work, we used [i18next](https://www.i18next.com/) library (along with [react-i18next](https://react.i18next.com/)) to manage internationalization in a React application. To implement it, it is usually necessary to do this:
