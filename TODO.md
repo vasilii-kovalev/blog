@@ -6,8 +6,6 @@
 - [ ] Use the `tags` field to filter posts
   - [ ] Replace the Eleventy-style `post` tag with topic tags
   - [ ] Decide how filtering by tags should look: tag pages or a filter next to the search
-- [ ] Consider Astro's default heading IDs instead of the markdown-it-anchor ones kept from Eleventy, which would remove the custom ID logic
-  - [ ] Check whether anything links to sections of existing posts
 - [ ] Decide whether to enable smart punctuation, which is off only to match the Eleventy output
 - [ ] Revisit [syntax highlighting](https://docs.astro.build/en/guides/syntax-highlighting/) once the site's design settles
 - [ ] Restore the upstream `monospace, monospace` in `normalize.css` once [parcel-bundler/lightningcss#1221](https://github.com/parcel-bundler/lightningcss/issues/1221) is fixed

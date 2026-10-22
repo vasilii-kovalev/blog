@@ -46,7 +46,7 @@ Posts are rendered by Sätteri, Astro's default Markdown processor. The custom t
 
 Smart punctuation is off, as it was in the Eleventy version. Syntax highlighting is off because the site's look is intentionally minimal: code blocks are plain monospace, without a highlighter's markup or theme. That may change once the design settles.
 
-Heading IDs and anchor markup reproduce what markdown-it-anchor generated in the Eleventy version, encoded Unicode included, so links to sections shared before the migration still work. Astro's own heading plugin runs after custom plugins and keeps IDs that are already set, so the headings returned by `render()` carry the same IDs.
+A plugin adds a permalink to each heading, linking to the id Astro's heading plugin assigns. That plugin is registered first. Astro appends the same plugin after the custom ones and keeps an id that is already set, so the headings returned by `render()` carry it.
 
 A fenced code block gets a caption from its info string: `label="…"` names the language, and an optional `file="…"` names the file. The caption is raw HTML placed around the code node, which is how Sätteri surrounds a node with tags.
 

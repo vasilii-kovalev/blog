@@ -1,6 +1,6 @@
 ---
-title: Why I wrote "hydrate‑text" library
-description: A post about why I wrote "hydrate‑text" library
+title: Why I wrote "hydrate-text" library
+description: A post about why I wrote "hydrate-text" library
 published: "2021-07-06"
 tags:
   - post
@@ -226,7 +226,7 @@ We wrote that application using JavaScript back then. After several years I lear
 
 ## The solution
 
-I like the API of the `t` function (path to a localization string and a bunch of variables to "hydrate" it), so I decided to copy it in a standalone package, that is known as ["hydrate‑text"](https://github.com/vasilii-kovalev/hydrate-text). Now let's implement our own i18n solution with it.
+I like the API of the `t` function (path to a localization string and a bunch of variables to "hydrate" it), so I decided to copy it in a standalone package, that is known as ["hydrate-text"](https://github.com/vasilii-kovalev/hydrate-text). Now let's implement our own i18n solution with it.
 
 - Define supported languages and a default one
 
@@ -714,7 +714,7 @@ Even if localization is not necessary, I believe it is still a good idea to keep
   };
   ```
 
-- Use `hydrate‑text` to provide the text with variables
+- Use `hydrate-text` to provide the text with variables
 
   ```typescript label="TypeScript" file="src/app.tsx"
   import { hydrateText } from "hydrate-text";
@@ -764,7 +764,7 @@ hydrateText(
 );
 ```
 
-If it is necessary to do this in several places, it is better to use another function from `hydrate‑text` - `configureHydrateText`, which will return `hydrateText` function bound to the chosen variable markers:
+If it is necessary to do this in several places, it is better to use another function from `hydrate-text` - `configureHydrateText`, which will return `hydrateText` function bound to the chosen variable markers:
 
 ```typescript label="TypeScript"
 const hydrateRoute = configureHydrateText({
@@ -793,7 +793,7 @@ The sizes were double-checked with [filesize VS Code extension](https://marketpl
 
 We miss `withTranslation` and `useTranslation` import costs, but I don't think it drastically changes the picture.
 
-### hydrate‑text approach
+### hydrate-text approach
 
 In each case, check console results and sum up `dist/assets/index.<hash>.js` and `dist/assets/vendor.<hash>.js` sizes.
 

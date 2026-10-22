@@ -1,10 +1,6 @@
 {
 	"files": ["**"],
-	"ignoreWords": [
-		"blogposts",
-		"blogfavicon",
-		"blogsearch"
-	],
+	"ignoreWords": ["blogposts", "blogfavicon", "blogsearch"],
 	"ignorePaths": ["./LICENSE"],
 	"import": ["@cspell/dict-ru_ru/cspell-ext.json"],
 	"language": "en,ru",
@@ -12,7 +8,6 @@
 	"version": "0.2",
 	"words": [
 		"bitap",
-		"eperm",
 		"flexsearch",
 		"frontmatter",
 		"kovalev",

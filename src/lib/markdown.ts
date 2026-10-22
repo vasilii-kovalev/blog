@@ -1,4 +1,4 @@
-import { defineHastPlugin, defineMdastPlugin, type HastPluginDefinition } from "satteri";
+import { defineHastPlugin, defineMdastPlugin } from "satteri";
 
 const escapeHtml = (value: string): string => {
 	return value.replace(/[&<>"']/gu, (character) => {
@@ -52,48 +52,39 @@ const codeCaptions = defineMdastPlugin({
 	name: "code-captions",
 });
 
-const getHeadingId = (slug: string, used: Set<string>): string => {
-	let id = slug;
-	let suffix = 1;
+const headingLinks = defineHastPlugin({
+	element: {
+		filter: ["h1", "h2", "h3", "h4", "h5", "h6"],
+		visit: (node) => {
+			const { id } = node.properties;
 
-	while (used.has(id)) {
-		id = `${slug}-${suffix}`;
-		suffix += 1;
-	}
+			// The heading plugin runs first and assigns this.
+			if (typeof id !== "string") {
+				return node;
+			}
 
-	used.add(id);
-	return id;
-};
-
-// A factory, so every page starts with no used IDs.
-const headingLinks = (): HastPluginDefinition => {
-	const used = new Set<string>();
-
-	return defineHastPlugin({
-		element: {
-			filter: ["h1", "h2", "h3", "h4", "h5", "h6"],
-			visit: (node, context) => {
-				// Match markdown-it-anchor's original IDs, including encoded Unicode.
-				const slug = encodeURIComponent(context.textContent(node).trim().toLowerCase().replace(/\s+/gu, "-"));
-				const id = getHeadingId(slug, used);
-
-				return {
-					...node,
-					children: [
-						{
-							children: node.children,
-							properties: { className: ["header-anchor"], href: `#${id}` },
-							tagName: "a",
-							type: "element",
+			return {
+				...node,
+				children: [
+					{
+						children: node.children,
+						properties: {
+							className: ["header-anchor"],
+							href: `#${id}`,
 						},
-					],
-					properties: { ...node.properties, id, tabIndex: -1 },
-				};
-			},
+						tagName: "a",
+						type: "element",
+					},
+				],
+				properties: {
+					...node.properties,
+					tabIndex: -1,
+				},
+			};
 		},
-		name: "heading-links",
-	});
-};
+	},
+	name: "heading-links",
+});
 
 /*
 	Available as `remarkPluginFrontmatter.searchText` from `render()`.
