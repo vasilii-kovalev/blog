@@ -3,6 +3,7 @@ import { defineConfig } from "oxfmt";
 // Indentation and line width come from `.editorconfig`.
 const config = defineConfig({
 	astro: true,
+	experimentalOperatorPosition: "start",
 	overrides: [
 		{
 			// Markdown prose uses spaces (see `.editorconfig`), but code blocks keep tabs.
