@@ -36,7 +36,8 @@
 		"lint:markdown:fix": "npm run lint:markdown:check -- --fix",
 		"lint:spell:check": "cspell . --quiet --no-show-suggestions && cspell-check-unused-words",
 		"lint:ts:check": "oxlint --ignore-path .gitignore",
-		"lint:ts:fix": "npm run lint:ts:check -- --fix"
+		"lint:ts:fix": "npm run lint:ts:check -- --fix",
+		"check-and-fix": "npm run astro:check && npm run lint:css:fix && npm run lint:markdown:fix && npm run lint:ts:fix && npm run lint:spell:check && npm run format:fix"
 	},
 	"dependencies": {
 		"minisearch": "7.2.0"

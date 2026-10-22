@@ -37,6 +37,7 @@ npm ci
 - `lint:spell:check` — Check spelling and report unused words in the CSpell configuration.
 - `lint:ts:check` — Lint TypeScript and report type errors.
 - `lint:ts:fix` — Apply TypeScript lint fixes.
+- `check-and-fix` — Run project checks and apply automatic fixes.
 
 ## Recommended extensions
 
