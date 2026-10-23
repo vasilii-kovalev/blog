@@ -56,10 +56,12 @@
 		"oxlint-tsgolint": "7.0.2004",
 		"rumdl": "0.3.0",
 		"satteri": "0.10.5",
+		"sonda": "0.14.0",
 		"stylelint": "17.16.0",
 		"stylelint-config-standard": "40.0.0",
 		"stylelint-order": "8.1.2",
-		"typescript": "6.0.3"
+		"typescript": "6.0.3",
+		"vite": "8.3.4"
 	},
 	"devEngines": {
 		"packageManager": {

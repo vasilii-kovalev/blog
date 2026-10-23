@@ -1,6 +1,7 @@
 # Artifacts
 dist
 .astro
+.sonda
 
 # Dependency directories
 node_modules

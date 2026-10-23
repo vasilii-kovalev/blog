@@ -102,6 +102,8 @@ npm 12 was chosen because its install-time security defaults are stricter than e
 
 `@astrojs/compiler-rs` is listed directly even though Astro already depends on it: Oxfmt needs it to format `.astro` files and declares it only as an optional peer. Its version has to satisfy both packages.
 
+`vite` is listed directly even though Astro already depends on it. Sonda's plugin types import `vite`, and the copy nested under `astro` is not visible from this config. The pinned version is the one Astro installs, so npm keeps a single copy.
+
 Small helpers, such as HTML escaping, are written by hand. A general-purpose utility library would replace only a few lines.
 
 ### TypeScript
@@ -114,13 +116,17 @@ The root `tsconfig.json` is the site program and extends `astro/tsconfigs/strict
 
 `@/` reaches a file under `src/`. Files in nested directories use `@/` because parent-relative imports are forbidden.
 
+A production build also writes a Sonda report of the client bundle. The only script the browser receives is search, and the report shows what that script contains after minification. Sonda reads source maps, so `vite.build.sourcemap` is on and the `.map` files are part of `dist/`. The HTML report is written to `.sonda/` and is not published.
+
+The Vite plugin is registered directly and limited to the client environment. Astro's Sonda integration adds itself from `astro:build:setup`, and it skips that hook when the target is `server` unless its `server` option is set. Astro 7 calls the hook once, with target `server`, before the environment builds, so the default integration never runs. Setting `server` would still name every report as the server build, including the build that renders the pages and is deleted afterward. The browser downloads the client bundle only.
+
 ### Lint and format
 
 Lint and format commands are plain npm scripts without caching. They run rarely enough that caching would not pay off.
 
 Oxlint and Oxfmt are used for speed. Oxlint enables every category except `nursery`, which the Oxlint docs mark as unstable by design. Oxfmt reads indentation and line width from `.editorconfig`: tabs, with spaces in Markdown. CSpell checks English and Russian because the existing post contains Russian text.
 
-Generated and tooling output lives in `.gitignore`. All tools read `.gitignore`, so the generated `dist/` and `.astro/` directories are skipped. Oxfmt, Stylelint, rumdl, and CSpell follow the same ignore file.
+Generated and tooling output lives in `.gitignore`. All tools read `.gitignore`, so the generated `dist/`, `.astro/`, and `.sonda/` directories are skipped. Oxfmt, Stylelint, rumdl, and CSpell follow the same ignore file.
 
 rumdl is the Markdown linter because markdownlint-cli and markdownlint-cli2 bring a large dependency tree with open security advisories, including issues a newer release still has. rumdl checks the same rules from a native binary and a much smaller install, and this repository has no custom JavaScript rules that would require the old tools. Rule settings live in `.rumdl.toml`, which the editor extension reads as well. rumdl checks Markdown files from the working directory and respects `.gitignore` by default. `.rumdl.toml` records the rule settings and leaves rumdl's own result cache off. These commands already run rarely enough that the cache would not pay off, and enabling it would only add a `.rumdl_cache/` directory to ignore.
 
