@@ -26,7 +26,7 @@
 		"dev": "astro dev",
 		"prod:build": "astro build",
 		"prod:preview": "astro preview",
-		"prod:publish": "npm run prod:build && gh-pages -d dist --nojekyll",
+		"prod:publish": "npm run prod:build && oneclickpush dist",
 		"astro:check": "astro check",
 		"format:check": "oxfmt --check",
 		"format:fix": "oxfmt",
@@ -51,7 +51,7 @@
 		"astro": "7.4.0",
 		"cspell": "10.4.0",
 		"cspell-check-unused-words": "1.6.3",
-		"gh-pages": "6.3.0",
+		"oneclickpush": "0.4.1",
 		"oxfmt": "0.73.0",
 		"oxlint": "1.88.0",
 		"oxlint-tsgolint": "7.0.2004",
@@ -61,11 +61,6 @@
 		"stylelint-config-standard": "40.0.0",
 		"stylelint-order": "8.1.2",
 		"typescript": "6.0.3"
-	},
-	"overrides": {
-		"make-dir": {
-			"semver": "6.3.1"
-		}
 	},
 	"devEngines": {
 		"packageManager": {

@@ -18,9 +18,9 @@ Several decisions below keep the Eleventy output unchanged, so existing links ke
 
 GitHub Pages is the only deployment target. It keeps hosting beside the source repository, costs nothing for this project, and avoids a dedicated server. The site is a project site under `https://vasilii-kovalev.github.io/blog/`.
 
-Publishing is a local step: `prod:publish` builds the site, and the `gh-pages` package pushes `dist/` to the root of the `gh-pages` branch. There is no deployment workflow in the repository. A local step is simpler to maintain and operate, and small commits do not start a deployment on every push.
+Publishing is a local step: `prod:publish` builds the site, and `oneclickpush` pushes `dist/` to the root of the `gh-pages` branch. There is no deployment workflow in the repository. A local step is simpler to maintain and operate, and small commits do not start a deployment on every push. `oneclickpush` replaces `gh-pages`, which has security issues and is unmaintained. The replacement has no dependencies and pushes with Node's built-in APIs and git.
 
-GitHub Pages runs Jekyll on a published branch unless a `.nojekyll` file is present. Jekyll would treat the generated site as source and omit names that start with `_` or `.`, including Astro's `_astro/` assets. Publishing passes `--nojekyll` so Pages serves the tree unchanged. That file is added to the published branch, not to `dist/` on `main`.
+GitHub Pages runs Jekyll on a published branch unless a `.nojekyll` file is present. Jekyll would treat the generated site as source and omit names that start with `_` or `.`, including Astro's `_astro/` assets. `oneclickpush` publishes `dist/` as it stands, including dotfiles. Its CLI has no way to add `.nojekyll` automatically. The empty file is `public/.nojekyll`. Astro copies `public/` into `dist/` unchanged, so the published branch receives that file and Pages serves the tree unchanged.
 
 `base` is `/blog` in every mode, so the development server uses the same URLs as production. Internal links are built from `import.meta.env.BASE_URL`.
 
