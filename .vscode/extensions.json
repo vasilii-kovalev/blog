@@ -4,6 +4,7 @@
 		"EditorConfig.EditorConfig",
 		"oxc.oxc-vscode",
 		"rvben.rumdl",
+		"streetsidesoftware.code-spell-checker-russian",
 		"streetsidesoftware.code-spell-checker",
 		"stylelint.vscode-stylelint"
 	]

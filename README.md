@@ -49,6 +49,7 @@ The workspace recommends these extensions. The same list is in
 - EditorConfig
 - Oxc
 - rumdl
+- Russian - Code Spell Checker
 - Stylelint
 
 ## External resources and inspirations
