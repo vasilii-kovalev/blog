@@ -93,6 +93,8 @@ const headingLinks = defineHastPlugin({
 const searchText = defineHastPlugin({
 	after: (root, context) => {
 		if (context.data.astro) {
+			// The plugin stores the page text on the host context.
+			// oxlint-disable-next-line eslint/no-param-reassign
 			context.data.astro.frontmatter.searchText = context.textContent(root);
 		}
 	},

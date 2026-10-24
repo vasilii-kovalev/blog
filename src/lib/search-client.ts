@@ -73,6 +73,8 @@ const findItems = (items: Array<HTMLElement>, ids: Array<string>): Array<HTMLEle
 	});
 };
 
+// The search UI is updated by writing these elements.
+/* oxlint-disable eslint/no-param-reassign */
 const showResults = (elements: SearchElements, items: Array<HTMLElement>, search: Search | null): void => {
 	const query = elements.input.value.trim();
 
@@ -89,6 +91,7 @@ const showResults = (elements: SearchElements, items: Array<HTMLElement>, search
 	elements.count.textContent = `${matches.length} ${resultLabel(matches.length)}`;
 	elements.list.replaceChildren(...matches);
 };
+/* oxlint-enable eslint/no-param-reassign */
 
 const initSearch = (): void => {
 	const elements = getSearchElements();
