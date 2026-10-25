@@ -94,10 +94,6 @@ pre {
 	margin-top: 0;
 }
 
-.footer {
-	padding-bottom: 2em;
-}
-
 .visually-hidden {
 	clip-path: inset(50%);
 	height: 1px;

@@ -18,6 +18,8 @@
 body {
 	background-color: var(--background-color);
 	color: var(--text-color);
+	display: flex;
+	flex-direction: column;
 	font-family:
 		-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans",
 		"Helvetica Neue", sans-serif;
@@ -27,7 +29,14 @@ body {
 	line-height: 1.5;
 	margin: 0 auto;
 	max-width: 40em;
+	min-height: 100vh;
+	min-height: 100dvh;
 	padding: 0 1em;
+}
+
+/* Grow the content so a short page pins the footer to the bottom of the viewport. */
+main {
+	flex-grow: 1;
 }
 
 h1 {
@@ -74,4 +83,12 @@ ul {
 ::selection {
 	background-color: var(--text-color);
 	color: var(--background-color);
+}
+
+.footer {
+	text-align: center;
+}
+
+.footer__license {
+	font-size: 90%;
 }

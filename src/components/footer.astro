@@ -1,0 +1,21 @@
+---
+interface Props {
+	source?: string;
+}
+
+const { source } = Astro.props;
+---
+
+<footer class="footer">
+	{source && (
+		<p>
+			<a href={source}>Edit this page on GitHub</a>
+		</p>
+	)}
+	<p class="footer__license">
+		Site code and code samples are licensed under the{" "}
+		<a href="https://github.com/vasilii-kovalev/blog/blob/main/LICENSE">MIT License</a>.
+		<br />
+		The prose of the blog posts and the original graphics, including the favicons, are © 2021 Vasilii Kovalev.
+	</p>
+</footer>

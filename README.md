@@ -58,4 +58,6 @@ The workspace recommends these extensions. The same list is in
 
 ## License
 
-[MIT](./LICENSE)
+The source code, this README, the files in [`docs/`](./docs), and code samples in the blog posts are licensed under the [MIT License](./LICENSE).
+
+The prose of the blog posts and the original graphics, including the favicons, are © 2021 Vasilii Kovalev.

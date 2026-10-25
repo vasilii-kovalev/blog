@@ -2,6 +2,7 @@
 import { type GetStaticPaths, type GetStaticPathsItem } from "astro";
 import { type CollectionEntry, getCollection, render } from "astro:content";
 
+import Footer from "@/components/footer.astro";
 import Header from "@/components/header.astro";
 import Page from "@/layouts/page.astro";
 import { formatPublicationDate } from "@/lib/posts";
@@ -41,7 +42,5 @@ export const getStaticPaths: GetStaticPaths = async () => {
 			<Content />
 		</article>
 	</main>
-	<footer class="footer">
-		<a href={source}>Edit this page on GitHub</a>
-	</footer>
+	<Footer source={source} />
 </Page>
